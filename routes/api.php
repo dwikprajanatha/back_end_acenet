@@ -15,12 +15,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/login', 'User\Auth\UserAuthController@login');
 
 // Route::post('/login', function () {
 //     return response()->json(['json' => 200]);
 // });
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::post('/login', 'User\Auth\UserAuthController@login');
+// Route::get('/getSPK', 'User\SpkController@getSPK');
+
+Route::middleware('auth:api')->group(function () {
+    //GET
+    Route::get('/getSPK', 'User\SpkController@getSPK');
+    Route::get('/getUpcomingSPK', 'User\SpkController@upComingSPK');
+    Route::get('/getDetailSPK', 'User\SpkController@getDetailSPK');
+
+    //POST
+    Route::post('post/submitSPK', 'User\SpkController@submitSPK');
 });

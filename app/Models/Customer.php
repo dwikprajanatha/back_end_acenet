@@ -2,25 +2,20 @@
 
 namespace App\Models;
 
-// use Laravel\Passport\HasApiTokens;
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-
-class Admin extends Authenticatable
+class Customer extends Model
 {
-    use Notifiable;
 
     public $timestamps = false;
-    protected $table = 'tb_admin';
+    protected $table = 'tb_customer';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'nama', 'password', 'username',
+        'nama', 'jenis_layanan', 'no_telp', 'alamat', 'tgl_instalasi', 'tgl_trial',
     ];
 
     /**
@@ -28,9 +23,9 @@ class Admin extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
-        'password',
-    ];
+    // protected $hidden = [
+    //     'password',
+    // ];
 
     /**
      * The attributes that should be cast to native types.

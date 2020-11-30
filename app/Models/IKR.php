@@ -2,25 +2,19 @@
 
 namespace App\Models;
 
-use Laravel\Passport\HasApiTokens;
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-
-class User extends Authenticatable
+class IKR extends Model
 {
-    use Notifiable, HasApiTokens;
-
     public $timestamps = false;
-    protected $table = 'tb_teknisi';
+    protected $table = 'tb_ikr';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'nama', 'email', 'password', 'username', 'avatar', 'jabatan', 'no_telp', 'remember_token',
+        'id_spk', 'id_teknisi',
     ];
 
     /**
@@ -29,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
     ];
 
     /**
@@ -41,8 +35,13 @@ class User extends Authenticatable
     //     'email_verified_at' => 'datetime',
     // ];
 
-    public function ikr()
+    public function spk()
     {
-        return $this->hasMany('App\Models\IKR');
+        return $this->belongsTo('App\Models\SPK');
+    }
+
+    public function teknisi()
+    {
+        return $this->belongsTo('App\Models\User');
     }
 }

@@ -46,13 +46,18 @@ class UserAuthController extends Controller
         ]);
 
 
-        if ($validate->fails()) {
-            return response()->json($request);
-        }
+        // if ($validate->fails()) {
+        //     return response()->json($request);
+        // }
 
         // $guard = Auth::guard('teknisi');
 
-        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
+        $login = [
+            'username' => $request->username,
+            'password' => $request->password
+        ];
+
+        if (Auth::guard('teknisi')->attempt($login)) {
 
             $data = [
                 'nama' => Auth::user()->nama,
@@ -69,7 +74,14 @@ class UserAuthController extends Controller
 
             return response()->json($response);
         } else {
-            redirect()->back();
+
+            $response = [
+                'success' => false,
+                'messages' => 'Login Invalid',
+                'data' => []
+            ];
+
+            return response()->json($response);
         }
     }
 }

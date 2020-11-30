@@ -19,13 +19,14 @@ class CreateSpkTable extends Migration
             $table->unsignedBigInteger("id_admin");
             $table->string("no_spk");
             $table->string("ket_pekerjaan");
-            $table->string("tgl_pekerjaan");
+            $table->date("tgl_pekerjaan");
             $table->time("jam_mulai");
             $table->time("jam_selesai");
             $table->string("download_speed")->nullable();
             $table->string("upload_speed")->nullable();
             $table->string("ket_lanjutan")->nullable();
             $table->string("status");
+
 
 
             $table->foreign("id_customer")->references("id")->on("tb_customer");

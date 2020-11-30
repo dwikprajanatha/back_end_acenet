@@ -2,25 +2,19 @@
 
 namespace App\Models;
 
-// use Laravel\Passport\HasApiTokens;
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Model;
 
-
-class Admin extends Authenticatable
+class TandaTangan extends Model
 {
-    use Notifiable;
-
     public $timestamps = false;
-    protected $table = 'tb_admin';
+    protected $table = 'tb_tanda_tangan';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'nama', 'password', 'username',
+        'id_spk', 'role', 'path', 'status',
     ];
 
     /**
@@ -28,9 +22,9 @@ class Admin extends Authenticatable
      *
      * @var array
      */
-    protected $hidden = [
-        'password',
-    ];
+    // protected $hidden = [
+    //     'password',
+    // ];
 
     /**
      * The attributes that should be cast to native types.
@@ -43,6 +37,6 @@ class Admin extends Authenticatable
 
     public function spk()
     {
-        return $this->hasMany('App\Models\SPK');
+        return $this->belongsTo('App\Models\SPK');
     }
 }
