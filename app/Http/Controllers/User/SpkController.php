@@ -22,7 +22,7 @@ class SpkController extends Controller
             $data = DB::table('tb_spk')->join('tb_customer', 'tb_spk.id_customer', '=', 'tb_customer.id')
                 ->join('tb_admin', 'tb_spk.id_admin', '=', 'tb_admin.id')
                 ->join('tb_ikr', 'tb_ikr.id_spk', '=', 'tb_spk.id')
-                ->select('tb_spk.*', 'tb_customer.*', 'tb_admin.nama_admin')
+                ->select('tb_spk.*', 'tb_customer.*', 'tb_admin.nama_admin')->where('tb_spk.status', 0)
                 ->where('tb_ikr.id_teknisi', $request->id_teknisi)->whereDate('tgl_pekerjaan', date('Y-m-d'))->get();
 
 
@@ -64,7 +64,7 @@ class SpkController extends Controller
             $data = DB::table('tb_spk')->join('tb_customer', 'tb_spk.id_customer', '=', 'tb_customer.id')
                 ->join('tb_admin', 'tb_spk.id_admin', '=', 'tb_admin.id')
                 ->join('tb_ikr', 'tb_ikr.id_spk', '=', 'tb_spk.id')
-                ->select('tb_spk.*', 'tb_customer.*', 'tb_admin.nama_admin')
+                ->select('tb_spk.*', 'tb_customer.*', 'tb_admin.nama_admin')->where('tb_spk.status', 0)
                 ->where('tb_ikr.id_teknisi', $request->id_teknisi)->whereBetween('tgl_pekerjaan', [$dateNow, $twoWeeks])->get();
 
             foreach ($data as $d) {
@@ -184,5 +184,43 @@ class SpkController extends Controller
         ];
 
         return response()->json($json_data);
+    }
+
+    public function listJobDone(Request $request)
+    {
+        try {
+
+            $data = DB::table('tb_spk')->join('tb_customer', 'tb_spk.id_customer', '=', 'tb_customer.id')
+                ->join('tb_admin', 'tb_spk.id_admin', '=', 'tb_admin.id')
+                ->join('tb_ikr', 'tb_ikr.id_spk', '=', 'tb_spk.id')
+                ->select('tb_spk.*', 'tb_customer.*', 'tb_admin.nama_admin')
+                ->where('tb_ikr.id_teknisi', $request->id_teknisi)->where('tb_spk.status', 1)
+                ->whereMonth('tb_spk.tgl_pekerjaan', date('n'))->get();
+
+
+            foreach ($data as $d) {
+                $d->jam_mulai = date("H:i", strtotime($d->jam_mulai));
+                $d->jam_selesai = date("H:i", strtotime($d->jam_selesai));
+            }
+
+
+            $json_data = [
+                "success" => true,
+                "message" => "Success",
+                'data' => $data
+            ];
+
+            return response()->json($json_data);
+        } catch (\Throwable $th) {
+
+
+            $json_data = [
+                "success" => false,
+                "message" => "something went wrong",
+                'data' => []
+            ];
+
+            return response()->json($json_data);
+        }
     }
 }
