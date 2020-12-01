@@ -12,5 +12,19 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
+        $this->call(TbTeknisiTableSeeder::class);
+        $this->call(TbCustomerTableSeeder::class);
+        $this->call(TbTandaTanganTableSeeder::class);
+        $this->call(TbSpkTableSeeder::class);
+        $this->call(TbIkrTableSeeder::class);
+        $this->call(TbAdminTableSeeder::class);
+        $this->call(PasswordResetsTableSeeder::class);
+        $this->call(OauthRefreshTokensTableSeeder::class);
+        $this->call(OauthPersonalAccessClientsTableSeeder::class);
+        $this->call(OauthClientsTableSeeder::class);
+        $this->call(OauthAuthCodesTableSeeder::class);
+        $this->call(OauthAccessTokensTableSeeder::class);
+        $this->call(MigrationsTableSeeder::class);
+        $this->call(FailedJobsTableSeeder::class);
     }
 }

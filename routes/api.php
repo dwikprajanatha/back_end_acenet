@@ -25,7 +25,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::post('/login', 'User\Auth\UserAuthController@login');
-// Route::get('/getSPK', 'User\SpkController@getSPK');
+
+Route::get('/errorLogin', 'User\Auth\UserAuthController@errorLogin')->name('errorLogin');
 
 Route::middleware('auth:api')->group(function () {
     //GET

@@ -84,4 +84,15 @@ class UserAuthController extends Controller
             return response()->json($response);
         }
     }
+
+    public function errorLogin(Request $request)
+    {
+        $response = [
+            'success' => false,
+            'messages' => 'Please Login',
+            'data' => null
+        ];
+
+        return response()->json($response);
+    }
 }

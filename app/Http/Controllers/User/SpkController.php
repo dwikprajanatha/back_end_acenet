@@ -55,14 +55,14 @@ class SpkController extends Controller
     public function upComingSPK(Request $request)
     {
 
-        $dateNow = date('d-m-Y');
-        $twoWeeks = date('d-m-Y', strtotime('+2 week', $dateNow));
+        $dateNow = date('Y-m-d');
+        $twoWeeks = date('Y-m-d', strtotime('+2 weeks'));
 
         $data = DB::table('tb_spk')->join('tb_customer', 'tb_spk.id_customer', '=', 'tb_customer.id')
             ->join('tb_admin', 'tb_spk.id_admin', '=', 'tb_admin.id')
             ->join('tb_ikr', 'tb_ikr.id_spk', '=', 'tb_spk.id')
             ->select('tb_spk.*', 'tb_customer.*', 'tb_admin.nama_admin')
-            ->where('tb_ikr.id_teknisi', $request->id_teknisi)->whereBetween('tgl_perbaikan', [$dateNow, $twoWeeks])->get();
+            ->where('tb_ikr.id_teknisi', $request->id_teknisi)->whereBetween('tgl_pekerjaan', [$dateNow, $twoWeeks])->get();
 
         //ambil data customer dan admin
         // foreach ($data as $d) {
