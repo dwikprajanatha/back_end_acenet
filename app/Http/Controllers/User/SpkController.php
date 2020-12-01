@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
 use DB;
+use Exception;
 
 class SpkController extends Controller
 {
@@ -55,27 +56,26 @@ class SpkController extends Controller
     public function upComingSPK(Request $request)
     {
 
-        $dateNow = date('Y-m-d');
-        $twoWeeks = date('Y-m-d', strtotime('+2 weeks'));
+        try {
 
-        $data = DB::table('tb_spk')->join('tb_customer', 'tb_spk.id_customer', '=', 'tb_customer.id')
-            ->join('tb_admin', 'tb_spk.id_admin', '=', 'tb_admin.id')
-            ->join('tb_ikr', 'tb_ikr.id_spk', '=', 'tb_spk.id')
-            ->select('tb_spk.*', 'tb_customer.*', 'tb_admin.nama_admin')
-            ->where('tb_ikr.id_teknisi', $request->id_teknisi)->whereBetween('tgl_pekerjaan', [$dateNow, $twoWeeks])->get();
+            $dateNow = date('Y-m-d');
+            $twoWeeks = date('Y-m-d', strtotime('+2 weeks'));
 
-        //ambil data customer dan admin
-        // foreach ($data as $d) {
-        //     $customer = DB::table('tb_customer')->where('id')
-        // }
+            $data = DB::table('tb_spk')->join('tb_customer', 'tb_spk.id_customer', '=', 'tb_customer.id')
+                ->join('tb_admin', 'tb_spk.id_admin', '=', 'tb_admin.id')
+                ->join('tb_ikr', 'tb_ikr.id_spk', '=', 'tb_spk.id')
+                ->select('tb_spk.*', 'tb_customer.*', 'tb_admin.nama_admin')
+                ->where('tb_ikr.id_teknisi', $request->id_teknisi)->whereBetween('tgl_pekerjaan', [$dateNow, $twoWeeks])->get();
 
-        foreach ($data as $d) {
-            // dd($d->id);
-            $d->jam_mulai = date("H:i", strtotime($d->jam_mulai));
-            $d->jam_selesai = date("H:i", strtotime($d->jam_selesai));
+            foreach ($data as $d) {
+                // dd($d->id);
+                $d->jam_mulai = date("H:i", strtotime($d->jam_mulai));
+                $d->jam_selesai = date("H:i", strtotime($d->jam_selesai));
+            }
+        } catch (\Exception $e) {
+
+            $data = [];
         }
-
-        // dd($data);
 
         $json_data = [
             "success" => true,
@@ -89,30 +89,26 @@ class SpkController extends Controller
 
     public function getDetailSPK(Request $request)
     {
-        $data = DB::table('tb_spk')->join('tb_customer', 'tb_spk.id_customer', '=', 'tb_customer.id')
-            ->where('tb_spk.id', $request->id_spk)->first();
 
-        $ikr = DB::table("tb_ikr")->join("tb_teknisi", "tb_teknisi.id", "=", "tb_ikr.id_teknisi")
-            ->where('id_spk', $request->id_spk)->select('tb_teknisi.nama', 'tb_teknisi.id')->get();;
+        try {
 
-        // $arr_teknisi = [];
-        // dd($ikr[0]->nama);
-        // if (sizeof($ikr) > 1) {
-        //     foreach ($ikr as $i) {
-        //         // dd($i);
-        //         array_push($arr_teknisi, $i->nama);
-        //     }
-        // } else {
-        //     array_push($arr_teknisi, $ikr[0]->nama);
-        // }
+            $data = DB::table('tb_spk')->join('tb_customer', 'tb_spk.id_customer', '=', 'tb_customer.id')
+                ->where('tb_spk.id', $request->id_spk)->first();
 
-        $data->jam_mulai = date("H:i", strtotime($data->jam_mulai));
-        $data->jam_selesai = date("H:i", strtotime($data->jam_selesai));
+            $ikr = DB::table("tb_ikr")->join("tb_teknisi", "tb_teknisi.id", "=", "tb_ikr.id_teknisi")
+                ->where('id_spk', $request->id_spk)->select('tb_teknisi.nama', 'tb_teknisi.id')->get();;
 
 
-        $data->teknisi = $ikr;
+            $data->jam_mulai = date("H:i", strtotime($data->jam_mulai));
+            $data->jam_selesai = date("H:i", strtotime($data->jam_selesai));
 
-        // dd($data);
+
+            $data->teknisi = $ikr;
+        } catch (Exception $e) {
+
+            $data = null;
+        }
+
 
         $json_data = [
             "success" => true,

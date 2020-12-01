@@ -78,7 +78,7 @@ class UserAuthController extends Controller
             $response = [
                 'success' => false,
                 'messages' => 'Login Invalid',
-                'data' => []
+                'data' => null
             ];
 
             return response()->json($response);
@@ -90,7 +90,7 @@ class UserAuthController extends Controller
         $response = [
             'success' => false,
             'messages' => 'Please Login',
-            'data' => null
+            'data' => []
         ];
 
         return response()->json($response);
