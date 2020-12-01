@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
@@ -149,12 +150,41 @@ class SpkController extends Controller
                 'ket_lanjutan' => $request->keterangan,
                 'download_speed' => $request->download_speed,
                 'upload_speed' => $request->upload_speed,
+                'status' => 1,
             ]);
 
         $json_data = [
             "success" => true,
             "message" => "Success",
             'data' => []
+        ];
+
+        return response()->json($json_data);
+    }
+
+    public function jobCount(Request $request)
+    {
+
+        $monthlyCount = DB::table('tb_spk')->join('tb_ikr', 'tb_spk.id', '=', 'tb_ikr.id_spk')
+            ->where('tb_ikr.id_teknisi', $request->id_teknisi)->whereMonth('tb_spk.tgl_pekerjaan', date('n'))
+            ->where('tb_spk.status', 1)->count();
+
+
+        $mingguAwal = date('Y-m-d', strtotime('monday this week'));
+        $mingguAkhir = date('Y-m-d', strtotime('sunday this week'));
+
+        $weeklyCount = DB::table('tb_spk')->join('tb_ikr', 'tb_spk.id', '=', 'tb_ikr.id_spk')
+            ->where('tb_ikr.id_teknisi', $request->id_teknisi)->whereBetween('tb_spk.tgl_pekerjaan', [$mingguAwal, $mingguAkhir])
+            ->where('tb_spk.status', 1)->count();
+
+
+        $json_data = [
+            "success" => true,
+            "message" => "Success",
+            'data' => [
+                'monthly_count' => $monthlyCount,
+                'weekly_count' => $weeklyCount,
+            ]
         ];
 
         return response()->json($json_data);
