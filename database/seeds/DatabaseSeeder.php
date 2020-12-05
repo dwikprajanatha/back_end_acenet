@@ -12,12 +12,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // $this->call(UsersTableSeeder::class);
+        $this->call(TbBtsTableSeeder::class);
+        $this->call(TbApTableSeeder::class);
+        $this->call(TbAdminTableSeeder::class);
         $this->call(TbTeknisiTableSeeder::class);
         $this->call(TbCustomerTableSeeder::class);
-        $this->call(TbTandaTanganTableSeeder::class);
         $this->call(TbSpkTableSeeder::class);
         $this->call(TbIkrTableSeeder::class);
-        $this->call(TbAdminTableSeeder::class);
+        $this->call(TbTandaTanganTableSeeder::class);
         $this->call(PasswordResetsTableSeeder::class);
         $this->call(OauthRefreshTokensTableSeeder::class);
         $this->call(OauthPersonalAccessClientsTableSeeder::class);
@@ -26,7 +28,5 @@ class DatabaseSeeder extends Seeder
         $this->call(OauthAccessTokensTableSeeder::class);
         $this->call(MigrationsTableSeeder::class);
         $this->call(FailedJobsTableSeeder::class);
-        $this->call(TbApTableSeeder::class);
-        $this->call(TbBtsTableSeeder::class);
     }
 }
