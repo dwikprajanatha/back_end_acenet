@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
-class maintenanceController extends Controller
+class pencabutanController extends Controller
 {
     public function index(Request $request)
     {
@@ -15,19 +15,19 @@ class maintenanceController extends Controller
         $listSPK = DB::table('tb_spk')->join('tb_customer', 'tb_spk.id_customer', '=', 'tb_customer.id')
             ->join('tb_ap', 'tb_customer.id_ap', '=', 'tb_ap.id')
             ->join('tb_bts', 'tb_ap.id_bts', '=', 'tb_bts.id')
-            ->where('tb_spk.status', 0)->where('jenis_pekerjaan', 2)
+            ->where('tb_spk.status', 0)->where('jenis_pekerjaan', 4)
             ->select('tb_spk.id', 'tb_spk.no_spk', 'tb_customer.nama', 'tb_spk.attn', 'tb_customer.no_telp', 'tb_customer.alamat', 'tb_spk.tgl_pekerjaan', 'tb_customer.jenis_layanan', 'tb_bts.nama_bts', 'tb_ap.nama_ap')
             ->orderBy('tgl_pekerjaan', 'asc')->get();
 
         // dd($listSPK);
 
         $data = [
-            'title' => 'Maintenance',
-            'header_title' => 'List SPK Maintenance',
+            'title' => 'Pencabutan',
+            'header_title' => 'List SPK Pencabutan',
             'lists' => $listSPK,
         ];
 
-        return view('admin.jadwal.maintenance.list_jadwal')->with($data);
+        return view('admin.jadwal.pencabutan.list_jadwal')->with($data);
     }
 
     public function create(Request $request)
@@ -49,14 +49,14 @@ class maintenanceController extends Controller
 
 
         $data = [
-            'title' => 'Maintenance',
-            'header_title' => 'Buat SPK Maintenance',
+            'title' => 'Pencabutan',
+            'header_title' => 'Buat SPK Pencabutan',
             'customers' => $listCustomer,
             'teknisi' => $listTeknisi,
             'no_spk' => $formatted_no_spk,
         ];
 
-        return view('admin.jadwal.maintenance.buat_jadwal')->with($data);
+        return view('admin.jadwal.pencabutan.buat_jadwal')->with($data);
     }
 
     public function getDataCustomer(Request $request)
@@ -126,10 +126,10 @@ class maintenanceController extends Controller
 
             DB::commit();
 
-            return redirect()->route('maintenance')->with('success', 'SPK Berhasil dibuat!');
+            return redirect()->route('pencabutan')->with('success', 'SPK Berhasil dibuat!');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->route('maintenance')->with('error', 'Sepertinya ada yang salah..');
+            return redirect()->route('pencabutan')->with('error', 'Sepertinya ada yang salah..');
         }
     }
 
@@ -155,13 +155,13 @@ class maintenanceController extends Controller
             ->where('id_spk', $request->id)->get();
 
         $data = [
-            'title' => 'Maintenance',
-            'header_title' => 'Detail SPK Maintenance',
+            'title' => 'Pencabutan',
+            'header_title' => 'Detail SPK Pencabutan',
             'spk' => $detailSPK,
             'teknisi' => $ikr,
         ];
 
-        return view('admin.jadwal.maintenance.detail_jadwal')->with($data);
+        return view('admin.jadwal.pencabutan.detail_jadwal')->with($data);
     }
 
     public function edit(Request $request)
@@ -191,8 +191,8 @@ class maintenanceController extends Controller
         // dd($arr_ikr);
 
         $data = [
-            'title' => 'Maintenance',
-            'header_title' => 'Edit SPK Maintenance',
+            'title' => 'Pencabutan',
+            'header_title' => 'Edit SPK Pencabutan',
             'spk' => $detailSPK,
             'ikr' => $arr_ikr,
             'customers' => $dataCustomer,
@@ -204,7 +204,7 @@ class maintenanceController extends Controller
         // print_r($ikr[0]);
         // dd($data);
 
-        return view('admin.jadwal.instalasi.edit_jadwal')->with($data);
+        return view('admin.jadwal.pencabutan.edit_jadwal')->with($data);
     }
 
     public function update(Request $request)
@@ -301,11 +301,11 @@ class maintenanceController extends Controller
 
             DB::commit();
 
-            return redirect()->route('maintenance')->with('success', 'SPK Berhasil diupdate!');
+            return redirect()->route('pencabutan')->with('success', 'SPK Berhasil diupdate!');
         } catch (Exception $e) {
             DB::rollBack();
             dd($e);
-            return redirect()->route('maintenance')->with('error', 'Sepertinya ada yang salah..');
+            return redirect()->route('pencabutan')->with('error', 'Sepertinya ada yang salah..');
         }
     }
 
@@ -315,11 +315,11 @@ class maintenanceController extends Controller
         try {
             DB::table('tb_spk')->where('id', $request->id)->update(['status' => 2]);
 
-            return redirect()->route('maintenance')->with('success', 'SPK berhasil dibatalkan!');
+            return redirect()->route('pencabutan')->with('success', 'SPK berhasil dibatalkan!');
         } catch (Exception $e) {
 
             dd($e);
-            return redirect()->route('maintenance')->with('error', 'Sepertinya ada yang salah..');
+            return redirect()->route('pencabutan')->with('error', 'Sepertinya ada yang salah..');
         }
     }
 }

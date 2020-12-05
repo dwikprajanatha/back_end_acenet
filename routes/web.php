@@ -43,3 +43,13 @@ Route::get('/jadwal/maintenance/delete/{id}', 'Admin\Jadwal\maintenanceControlle
 
 Route::post('/jadwal/maintenance/post', 'Admin\Jadwal\maintenanceController@post')->name('maintenance.post');
 Route::post('/jadwal/maintenance/update', 'Admin\Jadwal\maintenanceController@update')->name('maintenance.update');
+
+//Pencabutan
+Route::get('/jadwal/pencabutan', 'Admin\Jadwal\pencabutanController@index')->name('pencabutan');
+Route::get('/jadwal/pencabutan/create', 'Admin\Jadwal\pencabutanController@create')->name('pencabutan.create');
+Route::get('/jadwal/pencabutan/detail/{id}', 'Admin\Jadwal\pencabutanController@detail')->name('pencabutan.detail');
+Route::get('/jadwal/pencabutan/edit/{id}', 'Admin\Jadwal\pencabutanController@edit')->name('pencabutan.edit');
+Route::get('/jadwal/pencabutan/delete/{id}', 'Admin\Jadwal\pencabutanController@batal')->name('pencabutan.delete');
+
+Route::post('/jadwal/pencabutan/post', 'Admin\Jadwal\pencabutanController@post')->name('pencabutan.post');
+Route::post('/jadwal/pencabutan/update', 'Admin\Jadwal\pencabutanController@update')->name('pencabutan.update');

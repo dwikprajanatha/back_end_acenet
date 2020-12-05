@@ -18,6 +18,7 @@ class CreateSpkTable extends Migration
             $table->foreignId("id_customer");
             $table->foreignId("id_admin");
             $table->string("no_spk");
+            $table->string("attn")->nullable();
             $table->string("ket_pekerjaan");
             $table->date("tgl_pekerjaan");
             $table->tinyInteger("jenis_pekerjaan");

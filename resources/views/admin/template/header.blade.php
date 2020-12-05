@@ -75,7 +75,7 @@
                         <a class="collapse-item" href="{{route('instalasiBaru')}}">Instalasi Baru</a>
                         <a class="collapse-item" href="{{route('maintenance')}}">Maintenance Client</a>
                         <a class="collapse-item" href="#">Maintenace BTS</a>
-                        <a class="collapse-item" href="#">Pencabutan Perangkat</a>
+                        <a class="collapse-item" href="{{route('pencabutan')}}">Pencabutan Perangkat</a>
                     </div>
                 </div>
             </li>
