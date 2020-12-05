@@ -74,24 +74,36 @@ class MigrationsTableSeeder extends Seeder
             9 => 
             array (
                 'id' => '10',
-                'migration' => '2020_09_28_094323_create_customer_table',
+                'migration' => '2020_09_28_094230_create_bts_table',
                 'batch' => '1',
             ),
             10 => 
             array (
                 'id' => '11',
-                'migration' => '2020_09_28_094536_create_spk_table',
+                'migration' => '2020_09_28_094300_create_ap_table',
                 'batch' => '1',
             ),
             11 => 
             array (
                 'id' => '12',
-                'migration' => '2020_09_28_095115_create_tanda_tangan_table',
+                'migration' => '2020_09_28_094323_create_customer_table',
                 'batch' => '1',
             ),
             12 => 
             array (
                 'id' => '13',
+                'migration' => '2020_09_28_094536_create_spk_table',
+                'batch' => '1',
+            ),
+            13 => 
+            array (
+                'id' => '14',
+                'migration' => '2020_09_28_095115_create_tanda_tangan_table',
+                'batch' => '1',
+            ),
+            14 => 
+            array (
+                'id' => '15',
                 'migration' => '2020_09_28_095159_create_tanda_ikr_table',
                 'batch' => '1',
             ),

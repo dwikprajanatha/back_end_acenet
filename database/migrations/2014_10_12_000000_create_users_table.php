@@ -24,7 +24,6 @@ class CreateUsersTable extends Migration
             $table->string("jabatan");
             $table->string("no_telp");
             $table->rememberToken();
-            $table->timestamps();
         });
     }
 

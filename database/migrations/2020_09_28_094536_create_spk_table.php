@@ -15,17 +15,18 @@ class CreateSpkTable extends Migration
     {
         Schema::create('tb_spk', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("id_customer");
-            $table->unsignedBigInteger("id_admin");
+            $table->foreignId("id_customer");
+            $table->foreignId("id_admin");
             $table->string("no_spk");
             $table->string("ket_pekerjaan");
             $table->date("tgl_pekerjaan");
+            $table->tinyInteger("jenis_pekerjaan");
             $table->time("jam_mulai");
             $table->time("jam_selesai");
             $table->string("download_speed")->nullable();
             $table->string("upload_speed")->nullable();
             $table->string("ket_lanjutan")->nullable();
-            $table->string("status");
+            $table->string("status")->default(0);
 
 
 

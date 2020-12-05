@@ -15,10 +15,10 @@ class CreateTandaTanganTable extends Migration
     {
         Schema::create('tb_tanda_tangan', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("id_spk");
+            $table->foreignId("id_spk");
             $table->string("role");
             $table->string("path");
-            $table->string("status");
+            $table->tinyInteger("status");
 
             $table->foreign("id_spk")->references("id")->on("tb_spk");
         });

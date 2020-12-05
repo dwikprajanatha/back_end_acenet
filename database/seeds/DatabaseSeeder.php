@@ -26,5 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(OauthAccessTokensTableSeeder::class);
         $this->call(MigrationsTableSeeder::class);
         $this->call(FailedJobsTableSeeder::class);
+        $this->call(TbApTableSeeder::class);
+        $this->call(TbBtsTableSeeder::class);
     }
 }

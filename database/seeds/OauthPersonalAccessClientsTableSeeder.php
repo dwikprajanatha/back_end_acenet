@@ -21,8 +21,8 @@ class OauthPersonalAccessClientsTableSeeder extends Seeder
             array (
                 'id' => '1',
                 'client_id' => '1',
-                'created_at' => '2020-11-29 03:26:19.163',
-                'updated_at' => '2020-11-29 03:26:19.163',
+                'created_at' => '2020-12-03 02:15:41.510',
+                'updated_at' => '2020-12-03 02:15:41.510',
             ),
         ));
         

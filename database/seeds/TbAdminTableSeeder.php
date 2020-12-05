@@ -22,7 +22,7 @@ class TbAdminTableSeeder extends Seeder
                 'id' => '1',
                 'nama_admin' => 'Made Cenik',
                 'username' => 'madeCenik',
-                'password' => '$2y$10$gDI0Ju7gntvTGExdD7cBmuCM2xUlZryHMhNjTMSdqy.vciU04XzXC',
+                'password' => '$2y$10$3kWDM6zbGO3D/SGLyM2wqumzGUm4PqLoRG1c5WbU98GI4ZrQWR84.',
             ),
         ));
         

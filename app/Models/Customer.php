@@ -15,7 +15,7 @@ class Customer extends Model
      * @var array
      */
     protected $fillable = [
-        'nama', 'jenis_layanan', 'no_telp', 'alamat', 'tgl_instalasi', 'tgl_trial',
+        'id_ap', 'no_pelanggan', 'nama', 'jenis_layanan', 'no_telp', 'alamat', 'tgl_instalasi', 'tgl_trial',
     ];
 
     /**

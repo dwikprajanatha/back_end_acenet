@@ -15,8 +15,8 @@ class CreateTandaIkrTable extends Migration
     {
         Schema::create('tb_ikr', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("id_spk");
-            $table->unsignedBigInteger("id_teknisi");
+            $table->foreignId("id_spk");
+            $table->foreignId("id_teknisi");
 
             $table->foreign("id_spk")->references("id")->on("tb_spk");
             $table->foreign("id_teknisi")->references("id")->on("tb_teknisi");
