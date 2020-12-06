@@ -12,13 +12,14 @@ class TbSpkTableSeeder extends Seeder
      */
     public function run()
     {
-        
+        DB::beginTransaction();
+        DB::unprepared('SET IDENTITY_INSERT tb_spk ON');
 
         \DB::table('tb_spk')->delete();
-        
-        \DB::table('tb_spk')->insert(array (
-            0 => 
-            array (
+
+        \DB::table('tb_spk')->insert(array(
+            0 =>
+            array(
                 'id' => '1',
                 'id_customer' => '1',
                 'id_admin' => '1',
@@ -34,8 +35,8 @@ class TbSpkTableSeeder extends Seeder
                 'ket_lanjutan' => NULL,
                 'status' => '0',
             ),
-            1 => 
-            array (
+            1 =>
+            array(
                 'id' => '2',
                 'id_customer' => '2',
                 'id_admin' => '1',
@@ -51,8 +52,8 @@ class TbSpkTableSeeder extends Seeder
                 'ket_lanjutan' => NULL,
                 'status' => '1',
             ),
-            2 => 
-            array (
+            2 =>
+            array(
                 'id' => '6',
                 'id_customer' => '1',
                 'id_admin' => '1',
@@ -68,8 +69,8 @@ class TbSpkTableSeeder extends Seeder
                 'ket_lanjutan' => NULL,
                 'status' => '0',
             ),
-            3 => 
-            array (
+            3 =>
+            array(
                 'id' => '7',
                 'id_customer' => '2',
                 'id_admin' => '1',
@@ -86,7 +87,9 @@ class TbSpkTableSeeder extends Seeder
                 'status' => '2',
             ),
         ));
-        
-        
+
+
+        DB::unprepared('SET IDENTITY_INSERT tb_spk OFF');
+        DB::commit();
     }
 }

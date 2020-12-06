@@ -4,17 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BTS extends Model
+class maintenanceBTS extends Model
 {
     public $timestamps = false;
-    protected $table = 'tb_bts';
+    protected $table = 'tb_maintenance_bts';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'nama_bts', 'lokasi', 'status',
+        'id_spk', 'id_bts',
     ];
 
     /**
@@ -37,6 +37,11 @@ class BTS extends Model
 
     public function spk()
     {
-        return $this->hasMany('App\Models\maintenanceBTS');
+        return $this->belongsTo('App\Models\SPK');
+    }
+
+    public function bts()
+    {
+        return $this->belongsTo('App\Models\BTS');
     }
 }

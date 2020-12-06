@@ -53,3 +53,14 @@ Route::get('/jadwal/pencabutan/delete/{id}', 'Admin\Jadwal\pencabutanController@
 
 Route::post('/jadwal/pencabutan/post', 'Admin\Jadwal\pencabutanController@post')->name('pencabutan.post');
 Route::post('/jadwal/pencabutan/update', 'Admin\Jadwal\pencabutanController@update')->name('pencabutan.update');
+
+
+//Maintenance BTS
+Route::get('/jadwal/maintenanceBTS', 'Admin\Jadwal\maintenanceBTSController@index')->name('bts');
+Route::get('/jadwal/maintenanceBTS/create', 'Admin\Jadwal\maintenanceBTSController@create')->name('bts.create');
+Route::get('/jadwal/maintenanceBTS/detail/{id}', 'Admin\Jadwal\maintenanceBTSController@detail')->name('bts.detail');
+Route::get('/jadwal/maintenanceBTS/edit/{id}', 'Admin\Jadwal\maintenanceBTSController@edit')->name('bts.edit');
+Route::get('/jadwal/maintenanceBTS/delete/{id}', 'Admin\Jadwal\maintenanceBTSController@delete')->name('bts.delete');
+
+Route::post('/jadwal/maintenanceBTS/post', 'Admin\Jadwal\maintenanceBTSController@post')->name('bts.post');
+Route::post('/jadwal/maintenanceBTS/update', 'Admin\Jadwal\maintenanceBTSController@update')->name('bts.update');

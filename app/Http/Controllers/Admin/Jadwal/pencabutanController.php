@@ -106,7 +106,7 @@ class pencabutanController extends Controller
                 'id_admin' => 1, #Auth()->id
                 'no_spk' => $request->no_spk,
                 'ket_pekerjaan' => $request->ket_pekerjaan,
-                'tgl_pekerjaan' => $request->tgl_pekerjaan,
+                'tgl_pekerjaan' => date('Y-m-d', strtotime($request->tgl_pekerjaan)),
                 'jenis_pekerjaan' => $request->jenis_perbaikan,
                 'jam_mulai' => $request->jam_mulai,
                 'jam_selesai' => $request->jam_selesai,
@@ -239,7 +239,7 @@ class pencabutanController extends Controller
                     'id_admin' => 1, #Auth()->id
                     'no_spk' => $request->no_spk,
                     'ket_pekerjaan' => $request->ket_pekerjaan,
-                    'tgl_pekerjaan' => $request->tgl_pekerjaan,
+                    'tgl_pekerjaan' => date('Y-m-d', strtotime($request->tgl_pekerjaan)),
                     'jenis_pekerjaan' => $request->jenis_perbaikan,
                     'jam_mulai' => $request->jam_mulai,
                     'jam_selesai' => $request->jam_selesai,
