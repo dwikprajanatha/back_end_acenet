@@ -23,6 +23,18 @@
 
 </head>
 
+@php
+
+$url_awal = request()->segment(1);
+
+if($url_awal == 'jadwal' OR $url_awal == 'arsip'){
+$url_akhir = request()->segment(2);
+} else {
+$url_akhir = '';
+}
+
+@endphp
+
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -43,8 +55,8 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="index.html">
+            <li class="nav-item {{$url_awal == 'dashboard' ? 'active' : ''}}">
+                <a class="nav-link" href="{{route('dashboard')}}">
                     <i class="fa fa-home" aria-hidden="true"></i>
                     <span>Beranda</span></a>
             </li>
@@ -58,39 +70,34 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" aria-expanded="true">
+            <li class="nav-item {{$url_awal == 'manajemen' ? 'active' : ''}}">
+                <a class="nav-link collapsed" href="{{route('teknisi.index')}}" aria-expanded="true">
                     <i class="fa fa-address-card" aria-hidden="true"></i>
                     <span class="text-wrap">Manajemen Akun</span>
                 </a>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                    <span>Buat Jadwal</span>
+            <li class="nav-item {{$url_awal == 'jadwal' ? 'active' : ''}}">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fa fa-tasks" aria-hidden="true"></i>
+                    <span>List Jadwal</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseTwo" class="collapse {{$url_awal == 'jadwal' ? 'show' : ''}}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h7 class="collapse-header">Jenis Pekerjaan :</h7>
-                        <a class="collapse-item" href="{{route('instalasiBaru')}}">Instalasi Baru</a>
-                        <a class="collapse-item" href="{{route('maintenance')}}">Maintenance Client</a>
-                        <a class="collapse-item" href="{{route('bts')}}">Maintenace BTS</a>
-                        <a class="collapse-item" href="{{route('pencabutan')}}">Pencabutan Perangkat</a>
+                        <a class="collapse-item {{$url_akhir == 'instalasiBaru' ? 'active' : ''}}" href="{{route('instalasiBaru')}}">Instalasi Baru</a>
+                        <a class="collapse-item {{$url_akhir == 'maintenance' ? 'active' : ''}}" href="{{route('maintenance')}}">Maintenance Client</a>
+                        <a class="collapse-item {{$url_akhir == 'maintenanceBTS' ? 'active' : ''}}" href="{{route('bts')}}">Maintenace BTS</a>
+                        <a class="collapse-item {{$url_akhir == 'pencabutan' ? 'active' : ''}}" href="{{route('pencabutan')}}">Pencabutan Perangkat</a>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" aria-expanded="true">
-                    <i class="fa fa-ban" aria-hidden="true"></i>
-                    <span class="text-wrap">Pembatalan Jadwal</span>
-                </a>
 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" aria-expanded="true">
+            <li class="nav-item {{$url_awal == 'listSPK' ? 'active' : ''}}">
+                <a class="nav-link collapsed" href="{{route('jadwal.list')}}" aria-expanded="true">
                     <i class="fa fa-check-square" aria-hidden="true"></i>
-                    <span class="text-wrap">Jadwal Selesai</span>
+                    <span class="text-wrap">Semua Jadwal</span>
                 </a>
             </li>
 
@@ -103,15 +110,15 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" aria-expanded="true">
+            <li class="nav-item {{$url_akhir == 'dibatalkan' ? 'active' : ''}}">
+                <a class="nav-link collapsed" href="{{route('arsip.dibatalkan')}}" aria-expanded="true">
                     <i class="fas fa-fw fa-folder"></i>
                     <span class="text-wrap">Dibatalkan</span>
                 </a>
 
                 <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" aria-expanded="true">
+            <li class="nav-item {{$url_akhir == 'selesai' ? 'active' : ''}}">
+                <a class="nav-link collapsed" href="{{route('arsip.selesai')}}" aria-expanded="true">
                     <i class="fas fa-fw fa-folder"></i>
                     <span class="text-wrap">Selesai</span>
                 </a>
@@ -324,6 +331,8 @@
 
                 </nav>
                 <!-- End of Topbar -->
+
+
 
                 @yield('body')
 

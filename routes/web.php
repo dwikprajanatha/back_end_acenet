@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 // Auth::routes();
 
-Route::get('dashboard', 'Admin\dashboardController@index');
+Route::get('/dashboard', 'Admin\dashboardController@index')->name('dashboard');
 
 //Instalasi Baru
 Route::get('/jadwal/instalasiBaru', 'Admin\Jadwal\instalasiBaruController@index')->name('instalasiBaru');
@@ -54,7 +54,6 @@ Route::get('/jadwal/pencabutan/delete/{id}', 'Admin\Jadwal\pencabutanController@
 Route::post('/jadwal/pencabutan/post', 'Admin\Jadwal\pencabutanController@post')->name('pencabutan.post');
 Route::post('/jadwal/pencabutan/update', 'Admin\Jadwal\pencabutanController@update')->name('pencabutan.update');
 
-
 //Maintenance BTS
 Route::get('/jadwal/maintenanceBTS', 'Admin\Jadwal\maintenanceBTSController@index')->name('bts');
 Route::get('/jadwal/maintenanceBTS/create', 'Admin\Jadwal\maintenanceBTSController@create')->name('bts.create');
@@ -64,3 +63,28 @@ Route::get('/jadwal/maintenanceBTS/delete/{id}', 'Admin\Jadwal\maintenanceBTSCon
 
 Route::post('/jadwal/maintenanceBTS/post', 'Admin\Jadwal\maintenanceBTSController@post')->name('bts.post');
 Route::post('/jadwal/maintenanceBTS/update', 'Admin\Jadwal\maintenanceBTSController@update')->name('bts.update');
+
+//Selesaikan dan Batalkan
+Route::get('/listSPK', 'Admin\Jadwal\SelesaikanJadwalController@list_jadwal')->name('jadwal.list');
+Route::get('/listSPK/selesaikan/{id}', 'Admin\Jadwal\SelesaikanJadwalController@selesaikan')->name('jadwal.selesaikan');
+Route::get('/listSPK/batalkan/{id}', 'Admin\Jadwal\SelesaikanJadwalController@batalkan')->name('jadwal.batalkan');
+
+//Arsip selesai
+Route::get('/arsip/selesai', 'Admin\Arsip\ArsipController@selesai')->name('arsip.selesai');
+
+//Arsip dibatalkan
+Route::get('/arsip/dibatalkan', 'Admin\Arsip\ArsipController@dibatalkan')->name('arsip.dibatalkan');
+
+//Manajemen Akun
+Route::get('/teknisi', 'Admin\Teknisi\ManajemenAkunController@index')->name('teknisi.index');
+// Route::get('/teknisi/detail/{id}', 'Admin\Teknisi\ManajemenAkunController@detail')->name('teknisi.detail');
+Route::get('/teknisi/create', 'Admin\Teknisi\ManajemenAkunController@create')->name('teknisi.create');
+Route::get('/teknisi/edit/{id}', 'Admin\Teknisi\ManajemenAkunController@edit')->name('teknisi.edit');
+Route::get('/teknisi/delete/{id}', 'Admin\Teknisi\ManajemenAkunController@delete')->name('teknisi.delete');
+
+Route::get('/teknisi/password/{id}', 'Admin\Teknisi\ManajemenAkunController@password')->name('teknisi.password');
+
+Route::post('/teknisi/submit', 'Admin\Teknisi\ManajemenAkunController@submit')->name('teknisi.submit');
+Route::post('/teknisi/update', 'Admin\Teknisi\ManajemenAkunController@update')->name('teknisi.update');
+
+Route::post('/teknisi/password/reset', 'Admin\Teknisi\ManajemenAkunController@reset_password')->name('teknisi.reset_password');

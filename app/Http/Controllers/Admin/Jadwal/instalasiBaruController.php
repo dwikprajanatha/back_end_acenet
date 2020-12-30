@@ -43,7 +43,7 @@ class instalasiBaruController extends Controller
         $listTeknisi = DB::table('tb_teknisi')->get();
 
         try {
-            $no_spk = DB::table('tb_spk')->select('no_spk')->max('id');
+            $no_spk = DB::table('tb_spk')->select('no_spk')->max('no_spk');
             $no_spk += 1;
             $formatted_no_spk = sprintf("%06d", $no_spk);
         } catch (\Throwable $th) {

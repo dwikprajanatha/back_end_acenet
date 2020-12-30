@@ -23,11 +23,10 @@
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>No. SPK</th>
-                            <th>Nama BTS</th>
-                            <th>Alamat BTS</th>
-                            <th>Tanggal Out</th>
-                            <th>Keterangan</th>
+                            <th>Nama</th>
+                            <th>Email</th>
+                            <th>Jabatan</th>
+                            <th>No Telp</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -35,19 +34,16 @@
                         @foreach($lists as $list)
                         <tr>
                             <td>{{$loop->iteration}}</td>
-                            <td>{{$list->no_spk}}</td>
-                            <td>{{$list->nama_bts}}</td>
-                            <td>{{$list->lokasi}}</td>
-                            <td>{{$list->tgl_pekerjaan}}</td>
-                            <td>{{$list->ket_pekerjaan}}</td>
-                            <td><a href={{ route('bts.detail', $list->id) }} button type=" button" class="btn btn-warning">Detail</a></td>
+                            <td>{{$list->nama}}</td>
+                            <td>{{$list->email}}</td>
+                            <td>{{$list->jabatan}}</td>
+                            <td>{{$list->no_telp}}</td>
+                            <td><a href="{{ route('teknisi.edit', $list->id) }}" button type="button" class="btn btn-warning">Edit</a></td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
-
-                <a href={{ route('bts.create') }} button type=" button" class="btn btn-success">Tambah</a>
-
+                <a href={{ route('teknisi.create') }} button type=" button" class="btn btn-success">Tambah</a>
             </div>
         </div>
     </div>

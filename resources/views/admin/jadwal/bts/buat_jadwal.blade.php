@@ -21,20 +21,8 @@
                 </div>
                 <div class="card-body">
                     <!-- Form Start Here -->
-                    <form action="{{route('instalasiBaru.post')}}" method="post" autocomplete="off">
+                    <form action="{{route('bts.post')}}" method="post" autocomplete="off">
                         @csrf
-                        <div class="form-group">
-                            <label>Nama Pelanggan</label>
-                            <!-- harus dropdown ajax -->
-                            <div class="input-group">
-                                <select class="form-control select-2" id="select2-customer" name="nama_pelanggan">
-                                    <option></option>
-                                    @foreach($customers as $customer)
-                                    <option value="{{$customer->id}}">{{$customer->nama}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             <label>No. SPK</label>
@@ -43,17 +31,20 @@
                         </div>
 
                         <div class="form-group">
-                            <label>No. Pelanggan</label>
-                            <input type="text" name="no_pelanggan" id="no_pelanggan" class="form-control" readonly>
+                            <label>Nama BTS</label>
+                            <!-- harus dropdown ajax -->
+                            <div class="input-group">
+                                <select class="form-control select-2" id="select2-customer" name="id_bts[]" multiple>
+                                    <option></option>
+                                    @foreach($listBTS as $bts)
+                                    <option value="{{$bts->id}}">{{$bts->nama_bts}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
 
                         <div class="form-group">
-                            <label>ATTN</label>
-                            <input type="text" name="attn" class="form-control" placeholder="">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="datepicker">Tanggal Perbaikan</label>
+                            <label for="datepicker">Tanggal Pengerjaan</label>
                             <input id="datepicker" name="tgl_pekerjaan" data-date-format="mm/dd/yyyy">
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-th"></span>
@@ -108,17 +99,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">BTS</label>
-                            <input type="text" name="bts" id="bts" class="form-control" readonly>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">AP</label>
-                            <input type="text" name="ap" id="ap" class="form-control" readonly>
-                        </div>
-
-
                         <div class="form-group center">
                             <input type="submit" name="submit" class="btn btn-success" value="Buat SPK">
                             <a href="{{url()->previous()}}" class="btn btn-primary">Kembali</a>
@@ -153,29 +133,6 @@
         $('.select-2').select2({
             placeholder: "Pilih salah satu"
         });
-
-        $('#select2-customer').change(function() {
-                var id_customer = this.value;
-
-                if (id_customer != "") {
-                    $.ajax({
-                        type: "GET",
-                        url: "{{route('getDataCustomer')}}",
-                        data: {
-                            id: id_customer
-                        },
-                        success: function(data) {
-                            console.log(data);
-                            $('#no_pelanggan').val(data.no_pelanggan);
-                            $('#bts').val(data.bts);
-                            $('#ap').val(data.ap);
-                        }
-                    })
-                }
-
-            }
-
-        );
     });
 
     $('#datepicker').datepicker({

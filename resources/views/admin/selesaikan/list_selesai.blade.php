@@ -24,8 +24,6 @@
                         <tr>
                             <th>No.</th>
                             <th>No. SPK</th>
-                            <th>Nama BTS</th>
-                            <th>Alamat BTS</th>
                             <th>Tanggal Out</th>
                             <th>Keterangan</th>
                             <th>Aksi</th>
@@ -36,11 +34,12 @@
                         <tr>
                             <td>{{$loop->iteration}}</td>
                             <td>{{$list->no_spk}}</td>
-                            <td>{{$list->nama_bts}}</td>
-                            <td>{{$list->lokasi}}</td>
                             <td>{{$list->tgl_pekerjaan}}</td>
                             <td>{{$list->ket_pekerjaan}}</td>
-                            <td><a href={{ route('bts.detail', $list->id) }} button type=" button" class="btn btn-warning">Detail</a></td>
+                            <td>
+                                <a href={{ route('jadwal.selesaikan', $list->id) }} button type=" button" class="btn btn-warning">Selesai</a>
+                                <a href={{ route('jadwal.batalkan', $list->id) }} button type=" button" class="btn btn-danger">Batalkan</a>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
