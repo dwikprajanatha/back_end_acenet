@@ -12,13 +12,13 @@ class TbSpkTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('tb_spk')->delete();
-        
-        \DB::table('tb_spk')->insert(array (
-            0 => 
-            array (
+
+        \DB::table('tb_spk')->insert(array(
+            0 =>
+            array(
                 'id' => '1',
                 'id_customer' => '1',
                 'id_admin' => '1',
@@ -34,8 +34,8 @@ class TbSpkTableSeeder extends Seeder
                 'ket_lanjutan' => NULL,
                 'status' => '0',
             ),
-            1 => 
-            array (
+            1 =>
+            array(
                 'id' => '2',
                 'id_customer' => '2',
                 'id_admin' => '1',
@@ -51,8 +51,8 @@ class TbSpkTableSeeder extends Seeder
                 'ket_lanjutan' => NULL,
                 'status' => '0',
             ),
-            2 => 
-            array (
+            2 =>
+            array(
                 'id' => '6',
                 'id_customer' => '1',
                 'id_admin' => '1',
@@ -68,8 +68,8 @@ class TbSpkTableSeeder extends Seeder
                 'ket_lanjutan' => NULL,
                 'status' => '1',
             ),
-            3 => 
-            array (
+            3 =>
+            array(
                 'id' => '7',
                 'id_customer' => '2',
                 'id_admin' => '1',
@@ -85,8 +85,8 @@ class TbSpkTableSeeder extends Seeder
                 'ket_lanjutan' => NULL,
                 'status' => '0',
             ),
-            4 => 
-            array (
+            4 =>
+            array(
                 'id' => '8',
                 'id_customer' => '2',
                 'id_admin' => '1',
@@ -102,10 +102,10 @@ class TbSpkTableSeeder extends Seeder
                 'ket_lanjutan' => NULL,
                 'status' => '1',
             ),
-            5 => 
-            array (
+            5 =>
+            array(
                 'id' => '9',
-                'id_customer' => NULL,
+                'id_customer' => 1,
                 'id_admin' => '1',
                 'no_spk' => '000006',
                 'attn' => NULL,
@@ -120,7 +120,5 @@ class TbSpkTableSeeder extends Seeder
                 'status' => '1',
             ),
         ));
-        
-        
     }
 }
