@@ -8,13 +8,14 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use App\Traits\FCM_Push;
 
 class instalasiBaruController extends Controller
 {
+    use FCM_Push;
+
     public function index(Request $request)
     {
-
-
 
         $listSPK = DB::table('tb_spk')->join('tb_customer', 'tb_spk.id_customer', '=', 'tb_customer.id')
             ->join('tb_ap', 'tb_customer.id_ap', '=', 'tb_ap.id')
@@ -97,7 +98,7 @@ class instalasiBaruController extends Controller
         // $customer = DB::table('tb_customer')->find($request->nama_pelanggan);
 
         if ($validator->fails()) {
-            // back to form shows error
+            return redirect()->back()->withInput()->withErrors($validator);
         }
 
 
@@ -119,21 +120,30 @@ class instalasiBaruController extends Controller
 
             $ikr = [];
 
+            $arr_device_id = [];
+
             foreach ($request->teknisi as $tek) {
                 array_push($ikr, [
                     'id_spk' => $spk_id,
                     'id_teknisi' => $tek,
                 ]);
+
+                $device_id = DB::table('tb_teknisi')->where('id', $tek)->select('device_id')->first();
+                array_push($arr_device_id, $device_id);
             }
 
             $ikr = DB::table('tb_ikr')->insert($ikr);
 
             DB::commit();
 
-            return redirect()->route('instalasiBaru')->with('success', 'SPK Berhasil dibuat!');
+            $this->pushNotif($arr_device_id, "Test Notifikasi", "Hello World");
+
+            $request->session()->flash('success', 'SPK Berhasil dibuat!');
+            return redirect()->route('instalasiBaru');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->route('instalasiBaru')->with('error', 'Sepertinya ada yang salah..');
+            $request->session()->flash('error', 'Oops.. Sepertinya ada yang salah!');
+            return redirect()->route('instalasiBaru');
         }
     }
 

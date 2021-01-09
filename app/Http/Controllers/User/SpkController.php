@@ -95,7 +95,11 @@ class SpkController extends Controller
             }
         } catch (\Exception $e) {
 
-            $data = [];
+            $$json_data = [
+                "success" => false,
+                "message" => "something went wrong",
+                'data' => []
+            ];
         }
 
         $json_data = [
@@ -127,7 +131,11 @@ class SpkController extends Controller
             $data->teknisi = $ikr;
         } catch (Exception $e) {
 
-            $data = null;
+            $json_data = [
+                "success" => false,
+                "message" => "something went wrong",
+                'data' => []
+            ];
         }
 
 

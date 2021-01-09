@@ -12,23 +12,20 @@ class OauthPersonalAccessClientsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::beginTransaction();
-        DB::unprepared('SET IDENTITY_INSERT oauth_personal_access_clients ON');
-
+        
 
         \DB::table('oauth_personal_access_clients')->delete();
-
-        \DB::table('oauth_personal_access_clients')->insert(array(
-            0 =>
-            array(
+        
+        \DB::table('oauth_personal_access_clients')->insert(array (
+            0 => 
+            array (
                 'id' => '1',
                 'client_id' => '1',
                 'created_at' => '2020-12-03 02:15:41.510',
                 'updated_at' => '2020-12-03 02:15:41.510',
             ),
         ));
-
-        DB::unprepared('SET IDENTITY_INSERT oauth_personal_access_clients OFF');
-        DB::commit();
+        
+        
     }
 }

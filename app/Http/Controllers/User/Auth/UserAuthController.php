@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -42,7 +43,7 @@ class UserAuthController extends Controller
         $validate = Validator::make($request->all(), [
             'username' => 'required',
             'password' => 'required|min:8',
-
+            'device_id' => 'required',
         ]);
 
 
@@ -58,6 +59,11 @@ class UserAuthController extends Controller
         ];
 
         if (Auth::guard('teknisi')->attempt($login)) {
+
+            //update device ID
+            DB::table('tb_teknisi')->where('id', Auth::user()->id)->update([
+                'device_id' => $request->device_id,
+            ]);
 
             $data = [
                 'nama' => Auth::user()->nama,

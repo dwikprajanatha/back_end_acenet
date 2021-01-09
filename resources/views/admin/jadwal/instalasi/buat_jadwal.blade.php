@@ -27,12 +27,15 @@
                             <label>Nama Pelanggan</label>
                             <!-- harus dropdown ajax -->
                             <div class="input-group">
-                                <select class="form-control select-2" id="select2-customer" name="nama_pelanggan">
+                                <select class="form-control select-2" id="select2-customer" name="nama_pelanggan" required>
                                     <option></option>
                                     @foreach($customers as $customer)
                                     <option value="{{$customer->id}}">{{$customer->nama}}</option>
                                     @endforeach
                                 </select>
+                                @error('nama_pelanggan')
+                                <p class="text-danger">error : {{$message}}</p>
+                                @enderror
                             </div>
                         </div>
 
@@ -49,49 +52,67 @@
 
                         <div class="form-group">
                             <label>ATTN</label>
-                            <input type="text" name="attn" class="form-control" placeholder="">
+                            <input type="text" name="attn" class="form-control" placeholder="" required>
+                            @error('attn')
+                            <p class="text-danger">error : {{$message}}</p>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="datepicker">Tanggal Perbaikan</label>
-                            <input id="datepicker" name="tgl_pekerjaan" data-date-format="mm/dd/yyyy">
+                            <input id="datepicker" name="tgl_pekerjaan" data-date-format="mm/dd/yyyy" required>
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-th"></span>
                             </div>
+                            @error('tgl_pekerjaan')
+                            <p class="text-danger">error : {{$message}}</p>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="timepicker">Jam Mulai</label>
-                            <input type="text" name="jam_mulai" class="form-control time-picker">
+                            <input type="text" name="jam_mulai" class="form-control time-picker" required>
                             <small>*24 Hour format</small>
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-th"></span>
                             </div>
+                            @error('jam_mulai')
+                            <p class="text-danger">error : {{$message}}</p>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label for="timepicker">Jam Selesai</label>
-                            <input type="text" name="jam_selesai" class="form-control time-picker">
+                            <input type="text" name="jam_selesai" class="form-control time-picker" required>
                             <small>*24 Hour format</small>
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-th"></span>
                             </div>
+                            @error('jam_selesai')
+                            <p class="text-danger">error : {{$message}}</p>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label>Jenis Perbaikan</label>
-                            <select name="jenis_perbaikan" class="custom-select">
+                            <select name="jenis_perbaikan" class="custom-select" required>
                                 <option value="" hidden selected>Pilih salah satu</option>
                                 <option value="1">Instalasi Baru</option>
                                 <option value="2">Perbaikan Client</option>
                                 <option value="3">Maintenance BTS</option>
                                 <option value="4">Pencabutan Perangkat</option>
                             </select>
+                            @error('jenis_perbaikan')
+                            <p class="text-danger">error : {{$message}}</p>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label>Keterangan</label>
-                            <textarea class="form-control" name="ket_pekerjaan" rows="3"></textarea>
+                            <textarea class="form-control" name="ket_pekerjaan" rows="3" required></textarea>
+                            @error('ket_pekerjaan')
+                            <p class="text-danger">error : {{$message}}</p>
+                            @enderror
                         </div>
 
 
@@ -99,12 +120,15 @@
                             <label>Nama Teknisi</label>
                             <!-- harus dropdown ajax -->
                             <div class="input-group">
-                                <select class="form-control select-2" name="teknisi[]" multiple>
+                                <select class="form-control select-2" name="teknisi[]" multiple required>
                                     <option></option>
                                     @foreach($teknisi as $t)
                                     <option value="{{$t->id}}">{{$t->nama}}</option>
                                     @endforeach
                                 </select>
+                                @error('teknisi')
+                                <p class="text-danger">error : {{$message}}</p>
+                                @enderror
                             </div>
                         </div>
 

@@ -12,26 +12,25 @@ class TbTeknisiTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::beginTransaction();
-        DB::unprepared('SET IDENTITY_INSERT tb_teknisi ON');
+        
 
         \DB::table('tb_teknisi')->delete();
-
-        \DB::table('tb_teknisi')->insert(array(
-            0 =>
-            array(
+        
+        \DB::table('tb_teknisi')->insert(array (
+            0 => 
+            array (
                 'id' => '1',
-                'nama' => 'Ketut',
+                'nama' => 'Ketut Wijaya',
                 'username' => 'ketutketut',
-                'password' => '$2y$10$XCF1TOgpXvlayGzmBwKEhOJQq57gWnKoKLxRDzyZd5oEc1.JrN496',
-                'email' => 'ketut@ketut.com',
+                'password' => '$2y$10$rzgo2iVgJmG9hg/Ug.zwGuh65ARW.bl3Pj7UO01ybGY.ih..bPM5S',
+                'email' => 'ketut.wijaya@ketut.com',
                 'avatar' => NULL,
-                'jabatan' => 'teknisi',
-                'no_telp' => '019231023',
+                'jabatan' => 'Backbone',
+                'no_telp' => '019231023123',
                 'remember_token' => NULL,
             ),
-            1 =>
-            array(
+            1 => 
+            array (
                 'id' => '2',
                 'nama' => 'Dwik Prajanatha',
                 'username' => 'dwikdwik',
@@ -42,8 +41,8 @@ class TbTeknisiTableSeeder extends Seeder
                 'no_telp' => '019231023',
                 'remember_token' => NULL,
             ),
-            2 =>
-            array(
+            2 => 
+            array (
                 'id' => '3',
                 'nama' => 'Made Suparsana',
                 'username' => 'suparsana',
@@ -54,10 +53,20 @@ class TbTeknisiTableSeeder extends Seeder
                 'no_telp' => '019231023',
                 'remember_token' => NULL,
             ),
+            3 => 
+            array (
+                'id' => '4',
+                'nama' => 'Andika',
+                'username' => 'dikadika',
+                'password' => '$2y$10$h8ceN7zC5uh0DUAqfOPRQew.rtQbbwS9jB0tjTQ8sidx.H/70//2i',
+                'email' => 'dika@dika.com',
+                'avatar' => NULL,
+                'jabatan' => 'Supervisor',
+                'no_telp' => '0980123123',
+                'remember_token' => NULL,
+            ),
         ));
-
-
-        DB::unprepared('SET IDENTITY_INSERT tb_teknisi OFF');
-        DB::commit();
+        
+        
     }
 }

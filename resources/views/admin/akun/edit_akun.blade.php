@@ -26,28 +26,43 @@
                         <div class="form-group">
                             <label>Nama Teknisi</label>
                             <input type="text" name="nama" class="form-control" value="{{$user->nama}}">
+                            @error('nama')
+                            <p class="text-danger">error : {{$message}}</p>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label>Email</label>
                             <input type="text" name="email" class="form-control" value="{{$user->email}}">
+                            @error('email')
+                            <p class="text-danger">error : {{$message}}</p>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label>Username</label>
                             <input type="text" name="username" class="form-control" value="{{$user->username}}" readonly>
+                            @error('username')
+                            <p class="text-danger">error : {{$message}}</p>
+                            @enderror
                         </div>
 
 
                         <div class="form-group">
                             <label>Jabatan</label>
                             <input type="text" name="jabatan" class="form-control" value="{{$user->jabatan}}">
+                            @error('jabatan')
+                            <p class="text-danger">error : {{$message}}</p>
+                            @enderror
                         </div>
 
 
                         <div class="form-group">
                             <label>No. Telp</label>
                             <input type="text" name="no_telp" class="form-control" value="{{$user->no_telp}}">
+                            @error('no_telp')
+                            <p class="text-danger">error : {{$message}}</p>
+                            @enderror
                         </div>
 
                         <div class="form-group center">
@@ -66,7 +81,6 @@
 
 
     </div>
-    <!-- DataTales Example -->
 
 
 

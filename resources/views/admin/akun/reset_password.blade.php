@@ -26,6 +26,9 @@
                         <div class="form-group">
                             <label>New Password</label>
                             <input type="password" name="password" class="form-control">
+                            @error('password')
+                            <p class="text-danger">{{$message}}</p>
+                            @enderror
                         </div>
 
                         <div class="form-group">

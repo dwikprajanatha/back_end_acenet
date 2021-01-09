@@ -12,14 +12,13 @@ class TbCustomerTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::beginTransaction();
-        DB::unprepared('SET IDENTITY_INSERT tb_customer ON');
+        
 
         \DB::table('tb_customer')->delete();
-
-        \DB::table('tb_customer')->insert(array(
-            0 =>
-            array(
+        
+        \DB::table('tb_customer')->insert(array (
+            0 => 
+            array (
                 'id' => '1',
                 'id_ap' => '1',
                 'no_pelanggan' => 'ACE-001',
@@ -30,8 +29,8 @@ class TbCustomerTableSeeder extends Seeder
                 'tgl_instalasi' => '2020-12-03',
                 'tgl_trial' => '2020-12-03',
             ),
-            1 =>
-            array(
+            1 => 
+            array (
                 'id' => '2',
                 'id_ap' => '2',
                 'no_pelanggan' => 'ACE-002',
@@ -42,8 +41,8 @@ class TbCustomerTableSeeder extends Seeder
                 'tgl_instalasi' => '2020-12-03',
                 'tgl_trial' => '2020-12-03',
             ),
-            2 =>
-            array(
+            2 => 
+            array (
                 'id' => '3',
                 'id_ap' => '2',
                 'no_pelanggan' => 'ACE-003',
@@ -55,8 +54,7 @@ class TbCustomerTableSeeder extends Seeder
                 'tgl_trial' => '2020-12-03',
             ),
         ));
-
-        DB::unprepared('SET IDENTITY_INSERT tb_customer OFF');
-        DB::commit();
+        
+        
     }
 }

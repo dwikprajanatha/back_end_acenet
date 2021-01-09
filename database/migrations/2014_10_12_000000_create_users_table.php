@@ -23,6 +23,8 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->nullable();
             $table->string("jabatan");
             $table->string("no_telp");
+            $table->string("device_id");
+            $table->tinyInteger('status')->default(1);
             $table->rememberToken();
         });
     }

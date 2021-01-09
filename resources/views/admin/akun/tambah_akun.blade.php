@@ -22,37 +22,55 @@
 
                         <div class="form-group">
                             <label>Nama Teknisi</label>
-                            <input type="text" name="nama" class="form-control">
+                            <input type="text" name="nama" class="form-control" value="{{old('nama')}}" required>
+                            @error('nama')
+                            <p class="text-danger">error : {{$message}}</p>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="text" name="email" class="form-control">
+                            <input type="text" name="email" class="form-control" value="{{old('email')}}" required>
+                            @error('email')
+                            <p class="text-danger">error : {{$message}}</p>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label>Jabatan</label>
-                            <input type="text" name="jabatan" class="form-control">
+                            <input type="text" name="jabatan" class="form-control" value="{{old('jabatan')}}" required>
+                            @error('jabatan')
+                            <p class="text-danger">error : {{$message}}</p>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label>No. Telp</label>
-                            <input type="text" name="no_telp" class="form-control">
+                            <input type="text" name="no_telp" class="form-control" value="{{old('no_telp')}}" required>
+                            @error('no_telp')
+                            <p class="text-danger">error : {{$message}}</p>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label>Username</label>
-                            <input type="text" name="username" class="form-control">
+                            <input type="text" name="username" class="form-control" value="{{old('username')}}" required>
+                            @error('username')
+                            <p class="text-danger">error : {{$message}}</p>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" name="password" class="form-control">
+                            <input type="password" name="password" class="form-control" required>
+                            @error('password')
+                            <p class="text-danger">error : {{$message}}</p>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label>Password Confirmation</label>
-                            <input type="password" name="password_confirmation" class="form-control">
+                            <input type="password" name="password_confirmation" class="form-control" required>
                         </div>
 
                         <div class="form-group center">

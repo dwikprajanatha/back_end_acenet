@@ -12,14 +12,13 @@ class TbApTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::beginTransaction();
-        DB::unprepared('SET IDENTITY_INSERT tb_ap ON');
+        
 
         \DB::table('tb_ap')->delete();
-
-        \DB::table('tb_ap')->insert(array(
-            0 =>
-            array(
+        
+        \DB::table('tb_ap')->insert(array (
+            0 => 
+            array (
                 'id' => '1',
                 'id_bts' => '1',
                 'nama_ap' => 'Canggu 1',
@@ -28,8 +27,8 @@ class TbApTableSeeder extends Seeder
                 'ip_address' => '192.168.1.101',
                 'installed_at' => '2018-12-12',
             ),
-            1 =>
-            array(
+            1 => 
+            array (
                 'id' => '2',
                 'id_bts' => '1',
                 'nama_ap' => 'Canggu 2',
@@ -38,8 +37,8 @@ class TbApTableSeeder extends Seeder
                 'ip_address' => '192.168.1.115',
                 'installed_at' => '2017-07-05',
             ),
-            2 =>
-            array(
+            2 => 
+            array (
                 'id' => '3',
                 'id_bts' => '1',
                 'nama_ap' => 'Canggu 3',
@@ -48,8 +47,8 @@ class TbApTableSeeder extends Seeder
                 'ip_address' => '192.168.1.58',
                 'installed_at' => '2018-07-21',
             ),
-            3 =>
-            array(
+            3 => 
+            array (
                 'id' => '4',
                 'id_bts' => '2',
                 'nama_ap' => 'BatuBulan-Kober',
@@ -59,9 +58,7 @@ class TbApTableSeeder extends Seeder
                 'installed_at' => '2018-02-01',
             ),
         ));
-
-
-        DB::unprepared('SET IDENTITY_INSERT tb_ap OFF');
-        DB::commit();
+        
+        
     }
 }

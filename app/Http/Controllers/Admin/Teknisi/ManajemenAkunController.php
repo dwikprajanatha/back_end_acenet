@@ -12,7 +12,7 @@ class ManajemenAkunController extends Controller
 {
     public function index()
     {
-        $list_user = DB::table('tb_teknisi')->select('id', 'nama', 'email', 'jabatan', 'no_telp')->get();
+        $list_user = DB::table('tb_teknisi')->select('id', 'nama', 'email', 'jabatan', 'no_telp')->where('status', 1)->get();
 
         $data = [
             'title' => 'Manajemen Akun',
@@ -48,7 +48,7 @@ class ManajemenAkunController extends Controller
 
     public function delete(Request $request)
     {
-        # code...
+        DB::table('tb_teknisi')->where('id', $request->id)->update(['status', 0]);
     }
 
     public function submit(Request $request)
@@ -59,10 +59,11 @@ class ManajemenAkunController extends Controller
             'jabatan' => 'required',
             'no_telp' => 'required|min:10',
             'username' => 'required|unique:tb_teknisi,email',
+            'password' => 'required|confirmed|min:8',
         ]);
 
         if ($validator->fails()) {
-            dd($validator);
+            return redirect()->back()->withInput()->withErrors($validator);
         }
 
         DB::beginTransaction();
@@ -81,11 +82,14 @@ class ManajemenAkunController extends Controller
 
             DB::commit();
 
-            return redirect()->route('teknisi.index')->with('success', 'Akun Berhasil dibuat!');
+            $request->session()->flash('success', 'Akun Berhasil Ditambahkan!');
+            return redirect()->route('teknisi.index');
         } catch (\Exception $e) {
+
             DB::rollBack();
             dd($e);
-            return redirect()->back()->with('error', 'Sepertinya ada yang salah!');
+            $request->session()->flash('error', 'Oops.. Sepertinya ada yang salah!');
+            return redirect()->back();
         }
     }
 
@@ -100,7 +104,7 @@ class ManajemenAkunController extends Controller
         ]);
 
         if ($validator->fails()) {
-            dd($validator);
+            return redirect()->back()->withInput()->withErrors($validator);
         }
 
         DB::beginTransaction();
@@ -119,11 +123,12 @@ class ManajemenAkunController extends Controller
 
             DB::commit();
 
-            return redirect()->route('teknisi.index')->with('success', 'Akun Berhasil di update!');
+            $request->session()->flash('success', 'Akun Berhasil di Update!');
+            return redirect()->route('teknisi.index');
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e);
-            return redirect()->back()->with('error', 'Sepertinya ada yang salah!');
+            $request->session()->flash('error', 'Oops.. Sepertinya ada yang salah!');
+            return redirect()->back();
         }
     }
 
@@ -150,7 +155,7 @@ class ManajemenAkunController extends Controller
         ]);
 
         if ($validator->fails()) {
-            dd($validator);
+            redirect()->back()->withErrors($validator);
         }
 
         DB::beginTransaction();
@@ -163,13 +168,13 @@ class ManajemenAkunController extends Controller
 
             DB::commit();
 
-            return redirect()->route('teknisi.index')->with('success', 'Password berhasil diubah!');
+            $request->session()->flash('success', 'Password berhasil di reset!');
+            return redirect()->route('teknisi.index');
         } catch (\Exception $e) {
-
             DB::rollBack();
-
             dd($e);
-            return redirect()->back()->with('error', 'Sepertinya ada yang salah!');
+            $request->session()->flash('error', 'Oops.. Sepertinya ada yang salah!');
+            return redirect()->back();
         }
     }
 }

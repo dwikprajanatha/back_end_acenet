@@ -12,30 +12,27 @@ class TbBtsTableSeeder extends Seeder
      */
     public function run()
     {
-
-        DB::beginTransaction();
-        DB::unprepared('SET IDENTITY_INSERT tb_bts ON');
+        
 
         \DB::table('tb_bts')->delete();
-
-        \DB::table('tb_bts')->insert(array(
-            0 =>
-            array(
+        
+        \DB::table('tb_bts')->insert(array (
+            0 => 
+            array (
                 'id' => '1',
                 'nama_bts' => 'BTS Canggu',
                 'lokasi' => 'Dons Bakery Canggu',
                 'status' => '1',
             ),
-            1 =>
-            array(
+            1 => 
+            array (
                 'id' => '2',
                 'nama_bts' => 'BTS Batu Bulan',
                 'lokasi' => 'Deket Kober',
                 'status' => '1',
             ),
         ));
-
-        DB::unprepared('SET IDENTITY_INSERT tb_bts OFF');
-        DB::commit();
+        
+        
     }
 }

@@ -17,6 +17,7 @@
 
     <!-- Custom styles for this template-->
     <link href={{ asset("assets/css/sb-admin-2.min.css") }} rel="stylesheet">
+    <link href={{ asset("assets/vendor/toastr/toastr.min.css") }} rel="stylesheet">
 
     <!-- Custom CSS for page start here -->
     @yield('css')
@@ -36,6 +37,7 @@ $url_akhir = '';
 @endphp
 
 <body id="page-top">
+
 
     <!-- Page Wrapper -->
     <div id="wrapper">
@@ -302,7 +304,7 @@ $url_akhir = '';
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-white-600 small">Valerie Luna</span>
+                                <span class="mr-2 d-none d-lg-inline text-white-600 small">Admin</span>
                                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -387,6 +389,46 @@ $url_akhir = '';
 
     <!-- Custom scripts for all pages-->
     <script src={{ asset("assets/js/sb-admin-2.min.js") }}></script>
+    <script src={{ asset("assets/vendor/toastr/toastr.min.js") }}></script>
+
+
+    <script>
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "3000",
+            "hideDuration": "2000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+    </script>
+
+    <!-- Notifikasi -->
+
+
+    @if(session('success'))
+    <script>
+        toastr["success"]("{{session('success')}}", "Success!")
+    </script>
+    @endif
+
+    @if(session('error'))
+    <script>
+        toastr["warning"]("{{session('error')}}", "Error!")
+    </script>
+    @endif
+
+
+    <!-- End Notifikasi -->
 
     <!-- Custom Page JS start here -->
     @stack('javascript')
