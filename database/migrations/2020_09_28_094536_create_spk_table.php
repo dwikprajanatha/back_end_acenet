@@ -15,7 +15,7 @@ class CreateSpkTable extends Migration
     {
         Schema::create('tb_spk', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("id_customer");
+            $table->foreignId("id_customer")->nullable();
             $table->foreignId("id_admin");
             $table->string("no_spk");
             $table->string("attn")->nullable();

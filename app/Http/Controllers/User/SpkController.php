@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
-use DB;
 use Exception;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class SpkController extends Controller
 {
@@ -129,6 +129,29 @@ class SpkController extends Controller
 
 
             $data->teknisi = $ikr;
+
+            //get tanda tangan
+            // $data->ttdTeknisi = Storage::url(DB::table('tb_tanda_tangan')->select('path')->where([['id_spk', $request->id_spk], ['role', 'Teknisi']])->first());
+            // $data->ttdCustomer = Storage::url(DB::table('tb_tanda_tangan')->select('path')->where([['id_spk', $request->id_spk], ['role', 'Customer']])->first());
+
+            if ($data->status == 1) {
+
+                $pathTeknisi = DB::table('tb_tanda_tangan')->select('path')->where([['id_spk', $request->id_spk], ['role', 'Teknisi']])->first();
+                $pathCustomer = DB::table('tb_tanda_tangan')->select('path')->where([['id_spk', $request->id_spk], ['role', 'Customer']])->first();
+
+                $data->ttdTeknisi = Storage::disk('public')->url($pathTeknisi->path);
+                $data->ttdCustomer = Storage::disk('public')->url($pathCustomer->path);
+            } else {
+
+                $data->ttdTeknisi = null;
+                $data->ttdCustomer = null;
+            }
+
+            $json_data = [
+                "success" => true,
+                "message" => "Success",
+                'data' => $data
+            ];
         } catch (Exception $e) {
 
             $json_data = [
@@ -137,13 +160,6 @@ class SpkController extends Controller
                 'data' => []
             ];
         }
-
-
-        $json_data = [
-            "success" => true,
-            "message" => "Success",
-            'data' => $data
-        ];
 
         return response()->json($json_data);
     }
@@ -161,9 +177,9 @@ class SpkController extends Controller
         ]);
 
 
-        $signCustomerPath = Storage::putFile('ttd_customer', $request->file('signCustomer'));
+        $signCustomerPath = Storage::putFile('public/ttd_customer', $request->file('signCustomer'));
 
-        $signTeknisiPath = Storage::putFile('ttd_teknisi', $request->file('signTeknisi'));
+        $signTeknisiPath = Storage::putFile('public/ttd_teknisi', $request->file('signTeknisi'));
 
         $ttdTeknisi = DB::table('tb_tanda_tangan')->insert([
             ['id_spk' => $request->id_spk, 'role' => "Customer", 'path' => $signCustomerPath, 'status' => 1],
@@ -270,6 +286,7 @@ class SpkController extends Controller
 
         $data = [
             'id' => $user->id,
+            'nama' => $user->nama,
             'username' => $user->username,
             'email' => $user->email,
             'avatar' => $user->avatar,
@@ -280,6 +297,20 @@ class SpkController extends Controller
             "success" => true,
             "message" => "Success",
             'data' => $data
+        ];
+
+        return response()->json($json_data);
+    }
+
+    public function logout(Request $request)
+    {
+        // dd($request->id_teknisi);
+        DB::table('tb_teknisi')->where('id', $request->id_teknisi)->update(['device_id' => null]);
+
+        $json_data = [
+            "success" => true,
+            "message" => "Success",
+            'data' => [],
         ];
 
         return response()->json($json_data);

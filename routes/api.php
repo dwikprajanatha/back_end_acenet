@@ -37,7 +37,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/jobDone', 'User\SpkController@jobDone');
     Route::get('/listJobDone', 'User\SpkController@listJobDone');
     Route::get('/getProfile', 'User\SpkController@getProfile');
-
+    Route::get('/logout', 'User\SpkController@logout');
     //POST
     Route::post('post/submitSPK', 'User\SpkController@submitSPK');
 });

@@ -12,9 +12,6 @@ class dashboardController extends Controller
     {
 
         // Session::flush();
-
-        $request->session()->flash('error', 'success!');
-
         return view('admin.dashboard');
     }
 }
