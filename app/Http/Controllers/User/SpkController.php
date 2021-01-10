@@ -302,10 +302,10 @@ class SpkController extends Controller
         return response()->json($json_data);
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
         // dd($request->id_teknisi);
-        DB::table('tb_teknisi')->where('id', $request->id_teknisi)->update(['device_id' => null]);
+        DB::table('tb_teknisi')->where('id', Auth::user()->id)->update(['device_id' => null]);
 
         $json_data = [
             "success" => true,
