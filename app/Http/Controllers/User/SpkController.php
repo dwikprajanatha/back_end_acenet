@@ -177,9 +177,9 @@ class SpkController extends Controller
         ]);
 
 
-        $signCustomerPath = Storage::putFile('public/ttd_customer', $request->file('signCustomer'));
+        $signCustomerPath = Storage::disk('public')->putFile('ttd_customer', $request->file('signCustomer'));
 
-        $signTeknisiPath = Storage::putFile('public/ttd_teknisi', $request->file('signTeknisi'));
+        $signTeknisiPath = Storage::disk('public')->putFile('ttd_teknisi', $request->file('signTeknisi'));
 
         $ttdTeknisi = DB::table('tb_tanda_tangan')->insert([
             ['id_spk' => $request->id_spk, 'role' => "Customer", 'path' => $signCustomerPath, 'status' => 1],
