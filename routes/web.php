@@ -70,10 +70,10 @@ Route::get('/listSPK/selesaikan/{id}', 'Admin\Jadwal\SelesaikanJadwalController@
 Route::get('/listSPK/batalkan/{id}', 'Admin\Jadwal\SelesaikanJadwalController@batalkan')->name('jadwal.batalkan');
 
 //Arsip selesai
-Route::get('/arsip/selesai', 'Admin\Arsip\ArsipController@selesai')->name('arsip.selesai');
+Route::get('/arsip/selesai', 'Admin\Arsip\arsipController@selesai')->name('arsip.selesai');
 
 //Arsip dibatalkan
-Route::get('/arsip/dibatalkan', 'Admin\Arsip\ArsipController@dibatalkan')->name('arsip.dibatalkan');
+Route::get('/arsip/dibatalkan', 'Admin\Arsip\arsipController@dibatalkan')->name('arsip.dibatalkan');
 
 //Manajemen Akun
 Route::get('/teknisi', 'Admin\Teknisi\ManajemenAkunController@index')->name('teknisi.index');

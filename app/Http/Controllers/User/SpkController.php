@@ -68,7 +68,7 @@ class SpkController extends Controller
 
         try {
 
-            $dateNow = date('Y-m-d');
+            $dateNow = date('Y-m-d', strtotime('+1 days'));
             $twoWeeks = date('Y-m-d', strtotime('+2 weeks'));
 
             $data = DB::table('tb_spk')->join('tb_customer', 'tb_spk.id_customer', '=', 'tb_customer.id')

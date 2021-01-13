@@ -13,17 +13,12 @@ trait FCM_Push
 
         $data = [
             "registration_ids" => $device_id,
-            "notification" => [
-                "title" => $title,
-                "body" => $msg,
-            ],
             'priority' => 'high',
             'data' => [
                 'click_action'  => 'FLUTTER_NOTIFICATION_CLICK',
                 'title' => $title,
                 'body' => $msg,
             ],
-            'click_action'  => 'FLUTTER_NOTIFICATION_CLICK',
         ];
 
         $data_json = json_encode($data);

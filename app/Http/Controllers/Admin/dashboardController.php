@@ -13,6 +13,7 @@ class dashboardController extends Controller
 
     public function index(Request $request)
     {
+
         // Session::flush();
         return view('admin.dashboard');
     }
