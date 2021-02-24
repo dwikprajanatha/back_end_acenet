@@ -28,7 +28,7 @@
 
 $url_awal = request()->segment(1);
 
-if($url_awal == 'jadwal' OR $url_awal == 'arsip'){
+if($url_awal == 'jadwal' OR $url_awal == 'arsip' OR $url_awal == 'laporan'){
 $url_akhir = request()->segment(2);
 } else {
 $url_akhir = '';
@@ -131,11 +131,22 @@ $url_akhir = '';
                 <div class="sidebar-heading">
                     Menu Lain
                 </div>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fa fa-list-alt" aria-hidden="false"></i>
-                    <span>Buat Laporan</span></a>
+
+            <li class="nav-item {{$url_awal == 'jadwal' ? 'active' : ''}}">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                    <i class="fa fa-tasks" aria-hidden="true"></i>
+                    <span>Laporan</span>
+                </a>
+                <div id="collapseThree" class="collapse {{$url_awal == 'laporan' ? 'show' : ''}}" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h7 class="collapse-header">Jenis Laporan :</h7>
+                        <a class="collapse-item {{$url_akhir == 'tahunan' ? 'active' : ''}}" href="{{route('laporan.tahunan')}}">Tahunan</a>
+                        <a class="collapse-item {{$url_akhir == 'bulanan' ? 'active' : ''}}" href="{{route('laporan.bulanan')}}">Bulanan</a>
+                        <a class="collapse-item {{$url_akhir == 'mingguan' ? 'active' : ''}}" href="{{route('laporan.mingguan')}}">Mingguan</a>
+                    </div>
+                </div>
             </li>
+
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
@@ -304,7 +315,7 @@ $url_akhir = '';
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-white-600 small">Admin</span>
+                                <span class="mr-2 d-none d-lg-inline text-white-600 small">{{Auth::guard('admin')->user()->nama_admin}}</span>
                                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -374,7 +385,7 @@ $url_akhir = '';
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="{{route('admin.logout')}}">Logout</a>
                 </div>
             </div>
         </div>

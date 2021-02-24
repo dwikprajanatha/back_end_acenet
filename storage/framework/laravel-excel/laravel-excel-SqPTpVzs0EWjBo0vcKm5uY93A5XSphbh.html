@@ -1,0 +1,59 @@
+<table>
+    <thead>
+        <tr>
+            <th>No.</th>
+            <th>No.SPK</th>
+            <th>No. Customer</th>
+            <th>Customer</th>
+            <th>Alamat</th>
+            <th>Jenis Layanan</th>
+            <th>Tgl. Pekerjaan</th>
+            <th>Jenis Pekerjaan</th>
+            <th colspan="4">IKR</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach($data as $spk)
+        <tr>
+            <td>{{$loop->iteration}}</td>
+            <td>{{$spk->no_spk}}</td>
+            <td>{{$spk->no_pelanggan}}</td>
+            <td>{{$spk->nama}}</td>
+            <td>{{$spk->alamat}}</td>
+            <td>{{$spk->jenis_layanan}}</td>
+            <td>{{$spk->tgl_pekerjaan}}</td>
+
+            @if($spk->jenis_pekerjaan == 1)
+            <td>Instalasi Baru</td>
+            @elseif($spk->jenis_pekerjaan == 2)
+            <td>Maintenance Client</td>
+            @elseif($spk->jenis_pekerjaan == 3)
+            <td>Maintenance BTS</td>
+            @elseif($spk->jenis_pekerjaan == 4)
+            <td>Pencabutan Perankat</td>
+            @endif
+
+            @php
+            $i = 0
+            @endphp
+
+            @foreach($spk->ikr as $teknisi)
+            <td>{{$teknisi->nama}}</td>
+            @php
+            $i++
+            @endphp
+            @endforeach
+
+            @while($i <= 4) <td>
+                </td>
+                @php
+                $i++
+                @endphp
+
+                @endwhile
+
+        </tr>
+        @endforeach
+    </tbody>
+</table>

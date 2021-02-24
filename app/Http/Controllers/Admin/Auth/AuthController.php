@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -33,14 +34,39 @@ class AuthController extends Controller
     {
         $validate = $request->validate([
             'username' => 'required',
-            'password' => 'required|min:8',
+            'password' => 'required|min:6',
         ]);
 
 
-        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-            redirect()->route('dashboard');
+        $login = [
+            'username' => $request->username,
+            'password' => $request->password
+        ];
+
+        // dd($login);
+
+        if (Auth::guard('admin')->attempt($login)) {
+            // dd("masuk jon");
+            return redirect()->route('dashboard');
+            // dd(Auth::guard('admin')->user());
         } else {
-            redirect()->back();
+            // dd("error jon");
+
+            // Session::flash('error', "Sepertinya ada yang salah..");
+
+            return redirect()->back()->with('error', "Sepertinya ada yang salah..");
         }
+    }
+
+    public function logout()
+    {
+        Auth::guard('admin')->logout();
+
+        return redirect()->route('login.view')->with('success', "Berhasil Logout!");
+    }
+
+    public function login_form()
+    {
+        return view('admin.login.login');
     }
 }
