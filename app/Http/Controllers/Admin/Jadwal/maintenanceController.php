@@ -125,6 +125,8 @@ class maintenanceController extends Controller
             $ikr = DB::table('tb_ikr')->insert($ikr);
 
             DB::commit();
+            
+            $this->pushNotif($arr_device_id, "Pekerjaan Baru!", "SPK telah ditambahkan, Segera periksa!");
 
             return redirect()->route('maintenance')->with('success', 'SPK Berhasil dibuat!');
         } catch (\Exception $e) {

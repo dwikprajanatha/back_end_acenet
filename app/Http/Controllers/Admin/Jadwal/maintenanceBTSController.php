@@ -132,6 +132,8 @@ class maintenanceBTSController extends Controller
 
             DB::commit();
 
+            $this->pushNotif($arr_device_id, "Pekerjaan Baru!", "SPK telah ditambahkan, Segera periksa!");
+
             return redirect()->route('bts')->with('success', 'SPK berhasil dibuat!');
         } catch (\Exception $e) {
             //throw $th;
