@@ -112,7 +112,7 @@ class maintenanceBTSController extends Controller
                 'attn' => null,
                 'ket_pekerjaan' => $request->ket_pekerjaan,
                 'tgl_pekerjaan' => date('Y-m-d', strtotime($request->tgl_pekerjaan)),
-                'jenis_pekerjaan' => $request->jenis_pekerjaan,
+                'jenis_pekerjaan' => $request->jenis_perbaikan,
                 'jam_mulai' => $request->jam_mulai,
                 'jam_selesai' => $request->jam_selesai,
                 'status' => 0,
@@ -140,6 +140,7 @@ class maintenanceBTSController extends Controller
             return redirect()->route('bts')->with('error', 'Sepertinya ada yang salah..');
         }
     }
+
 
     public function edit(Request $request)
     {
