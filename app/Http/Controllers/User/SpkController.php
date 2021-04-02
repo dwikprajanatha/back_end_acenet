@@ -138,13 +138,18 @@ class SpkController extends Controller
 
                 $pathTeknisi = DB::table('tb_tanda_tangan')->select('path')->where([['id_spk', $request->id_spk], ['role', 'Teknisi']])->first();
                 $pathCustomer = DB::table('tb_tanda_tangan')->select('path')->where([['id_spk', $request->id_spk], ['role', 'Customer']])->first();
+                $pathFotoBukti = DB::table('tb_foto_bukti')->select('path')->where('id_spk', $request->id_spk)->first();
+                
 
                 $data->ttdTeknisi = Storage::disk('public')->url($pathTeknisi->path);
                 $data->ttdCustomer = Storage::disk('public')->url($pathCustomer->path);
+                $data->fotoBukti = Storage::disk('public')->url($pathFotoBukti->path);
+
             } else {
 
                 $data->ttdTeknisi = null;
                 $data->ttdCustomer = null;
+                $data->fotoBukti = null;
             }
 
             $json_data = [
@@ -171,9 +176,11 @@ class SpkController extends Controller
             'id_spk' => 'required|numeric',
             'signCustomer' => 'required|mimes:jpg,png,jpeg|max:2048',
             'signTeknisi' => 'required|mimes:jpg,png,jpeg|max:2048',
+            'fotoBukti' => 'required|mimes:jpg,png,jpeg|max:2048',
             'keterangan' => 'required|string',
             'download_data' => 'required|string',
             'upload_data' => 'required|string',
+            'jam_selesai' => 'required|string',
         ]);
 
 
@@ -181,13 +188,20 @@ class SpkController extends Controller
 
         $signTeknisiPath = Storage::disk('public')->putFile('ttd_teknisi', $request->file('signTeknisi'));
 
+        $fotoBukti = Storage::disk('public')->putFile('foto_bukti', $request->file('fotoBukti'));
+
         $ttdTeknisi = DB::table('tb_tanda_tangan')->insert([
             ['id_spk' => $request->id_spk, 'role' => "Customer", 'path' => $signCustomerPath, 'status' => 1],
             ['id_spk' => $request->id_spk, 'role' => "Teknisi", 'path' => $signTeknisiPath, 'status' => 1],
         ]);
 
+        $up_foto_bukti = DB::table('tb_foto_bukti')->insert(
+          ['id_spk' => $request->id_spk, 'path' => $fotoBukti, 'status' => 1]  
+        );
+
         $spk = DB::table('tb_spk')->where('id', $request->id_spk)
             ->update([
+                'jam_selesai' => $request->jam_selesai,
                 'ket_lanjutan' => $request->keterangan,
                 'download_speed' => $request->download_speed,
                 'upload_speed' => $request->upload_speed,

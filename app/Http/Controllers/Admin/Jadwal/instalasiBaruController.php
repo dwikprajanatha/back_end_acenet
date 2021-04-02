@@ -136,7 +136,7 @@ class instalasiBaruController extends Controller
 
             DB::commit();
 
-            $this->pushNotif($arr_device_id, "Test Notifikasi", "Hello World");
+            $this->pushNotif($arr_device_id, "Pekerjaan Baru!", "SPK telah ditambahkan, Segera periksa!");
 
             $request->session()->flash('success', 'SPK Berhasil dibuat!');
             return redirect()->route('instalasiBaru');
