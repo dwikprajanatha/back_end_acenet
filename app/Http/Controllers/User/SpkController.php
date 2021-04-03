@@ -184,6 +184,7 @@ class SpkController extends Controller
         ]);
 
 
+
         $signCustomerPath = Storage::disk('public')->putFile('ttd_customer', $request->file('signCustomer'));
 
         $signTeknisiPath = Storage::disk('public')->putFile('ttd_teknisi', $request->file('signTeknisi'));
@@ -203,8 +204,8 @@ class SpkController extends Controller
             ->update([
                 'jam_selesai' => $request->jam_selesai,
                 'ket_lanjutan' => $request->keterangan,
-                'download_speed' => $request->download_speed,
-                'upload_speed' => $request->upload_speed,
+                'download_speed' => $request->download_data,
+                'upload_speed' => $request->upload_data,
                 'status' => 1,
             ]);
 

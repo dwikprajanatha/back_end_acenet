@@ -22,6 +22,8 @@ Route::get('/', function () {
 Route::get('admin_login', 'Admin\Auth\AuthController@login_form')->name('login.view');
 Route::post('login', 'Admin\Auth\AuthController@login')->name('admin.login');
 
+Route::get('testNotif', 'HomeController@index');
+
 Route::middleware('auth:admin')->group(function () {
 
     Route::get('/dashboard', 'Admin\dashboardController@index')->name('dashboard');

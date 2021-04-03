@@ -83,7 +83,7 @@
 
                         <div class="form-group">
                             <label for="timepicker">Jam Selesai</label>
-                            <input type="text" name="jam_selesai" class="form-control time-picker" required>
+                            <input type="text" name="jam_selesai" class="form-control time-picker" readonly>
                             <small>*24 Hour format</small>
                             <div class="input-group-addon">
                                 <span class="glyphicon glyphicon-th"></span>
