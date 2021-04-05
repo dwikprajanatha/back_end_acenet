@@ -13,16 +13,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', 'HomeController@index');
 
 // Auth::routes();
 
 Route::get('admin_login', 'Admin\Auth\AuthController@login_form')->name('login.view');
 Route::post('login', 'Admin\Auth\AuthController@login')->name('admin.login');
 
-Route::get('testNotif', 'HomeController@index');
+// Route::get('testNotif', 'HomeController@index');
 
 Route::middleware('auth:admin')->group(function () {
 

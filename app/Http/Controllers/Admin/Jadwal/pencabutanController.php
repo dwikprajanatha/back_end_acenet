@@ -114,12 +114,17 @@ class pencabutanController extends Controller
             ]);
 
             $ikr = [];
+            
+            $arr_device_id = [];
 
             foreach ($request->teknisi as $tek) {
                 array_push($ikr, [
                     'id_spk' => $spk_id,
                     'id_teknisi' => $tek,
                 ]);
+
+                $device_id = DB::table('tb_teknisi')->where('id', $tek)->select('device_id')->first();
+                array_push($arr_device_id, $device_id);
             }
 
             $ikr = DB::table('tb_ikr')->insert($ikr);

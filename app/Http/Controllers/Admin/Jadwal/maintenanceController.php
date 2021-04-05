@@ -113,6 +113,8 @@ class maintenanceController extends Controller
                 'status' => 0,
             ]);
 
+            $arr_device_id = [];
+
             $ikr = [];
 
             foreach ($request->teknisi as $tek) {
@@ -120,6 +122,9 @@ class maintenanceController extends Controller
                     'id_spk' => $spk_id,
                     'id_teknisi' => $tek,
                 ]);
+
+                $device_id = DB::table('tb_teknisi')->where('id', $tek)->select('device_id')->first();
+                array_push($arr_device_id, $device_id);
             }
 
             $ikr = DB::table('tb_ikr')->insert($ikr);

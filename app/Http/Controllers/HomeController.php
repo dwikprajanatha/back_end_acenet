@@ -15,10 +15,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        // $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     // $this->middleware('auth');
+    // }
 
     /**
      * Show the application dashboard.
@@ -34,6 +34,8 @@ class HomeController extends Controller
         // } else if ($request->segment(2) == "pencabutan") {
         //     $route = "pencabutan";
         // }
+
+      
 
         $arr_device_id = ['c1qfjMT1Tk2lyZJZ3sNdK7:APA91bHKnXqL3xM8jKNtJUQQr4xXXm6k3Rd3vD9dbjyj7ohg2je6ApERAeTPL9EIycS4yyjZI8xCBpU1JmmAn08hY6lHo7mGcyyRknapIy6wr6PBrhwagWOHk0Eg17GUjMMnfO2eCXAx'];
 

@@ -8,9 +8,17 @@ trait FCM_Push
     public function pushNotif($device_id, $title, $msg)
     {
 
-        $url = 'https://fcm.googleapis.com/fcm/send';
-        $SERVER_API_TOKEN = 'AAAAOUfBbKU:APA91bEh6u-Dqa_lU_tZ3BWO4YvywLetACvCqnmpjalSo6nqO7ZbXzPnjVV6cQYajpn65KclS5KDCym4UIEYZ3Szq26FmU0qOHhPgYrRm-RRy367lns_2E-ES1mfTwii9RtN_8NP_Ire';
+          
+        $path = __DIR__.'\config.json';    
 
+        $pathJson = file_get_contents($path);
+
+        $json = json_decode($pathJson, true);
+
+        $url = 'https://fcm.googleapis.com/fcm/send';
+        $SERVER_API_TOKEN = $json['server_key'];
+
+        // dd($SERVER_API_TOKEN);
         $data = [
             "registration_ids" => $device_id,
             'priority' => 'high',

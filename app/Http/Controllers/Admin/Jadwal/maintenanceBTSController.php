@@ -118,10 +118,15 @@ class maintenanceBTSController extends Controller
                 'status' => 0,
             ]);
 
+            $arr_device_id = [];
+
             foreach ($request->teknisi as $id_tek) {
                 $ikr = DB::table('tb_ikr')->insert([
                     'id_spk' => $id_spk, 'id_teknisi' => $id_tek,
                 ]);
+
+                $device_id = DB::table('tb_teknisi')->where('id', $id_tek)->select('device_id')->first();
+                array_push($arr_device_id, $device_id);
             }
 
             foreach ($request->id_bts as $bts) {
@@ -129,6 +134,7 @@ class maintenanceBTSController extends Controller
                     'id_spk' => $id_spk, 'id_bts' => $bts,
                 ]);
             }
+
 
             DB::commit();
 
@@ -138,7 +144,6 @@ class maintenanceBTSController extends Controller
         } catch (\Exception $e) {
             //throw $th;
             DB::rollBack();
-            dd($e);
             return redirect()->route('bts')->with('error', 'Sepertinya ada yang salah..');
         }
     }
