@@ -118,15 +118,15 @@ class maintenanceBTSController extends Controller
                 'status' => 0,
             ]);
 
-            $arr_device_id = [];
+            // $arr_device_id = [];
 
             foreach ($request->teknisi as $id_tek) {
                 $ikr = DB::table('tb_ikr')->insert([
                     'id_spk' => $id_spk, 'id_teknisi' => $id_tek,
                 ]);
 
-                $device_id = DB::table('tb_teknisi')->where('id', $id_tek)->select('device_id')->first();
-                array_push($arr_device_id, $device_id);
+                // $device_id = DB::table('tb_teknisi')->where('id', $id_tek)->select('device_id')->first();
+                // array_push($arr_device_id, $device_id);
             }
 
             foreach ($request->id_bts as $bts) {
@@ -138,7 +138,7 @@ class maintenanceBTSController extends Controller
 
             DB::commit();
 
-            $this->pushNotif($arr_device_id, "Pekerjaan Baru!", "SPK telah ditambahkan, Segera periksa!");
+            // $this->pushNotif($arr_device_id, "Pekerjaan Baru!", "SPK telah ditambahkan, Segera periksa!");
 
             return redirect()->route('bts')->with('success', 'SPK berhasil dibuat!');
         } catch (\Exception $e) {

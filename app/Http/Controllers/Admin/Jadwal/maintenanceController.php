@@ -113,7 +113,7 @@ class maintenanceController extends Controller
                 'status' => 0,
             ]);
 
-            $arr_device_id = [];
+            // $arr_device_id = [];
 
             $ikr = [];
 
@@ -123,15 +123,15 @@ class maintenanceController extends Controller
                     'id_teknisi' => $tek,
                 ]);
 
-                $device_id = DB::table('tb_teknisi')->where('id', $tek)->select('device_id')->first();
-                array_push($arr_device_id, $device_id);
+                // $device_id = DB::table('tb_teknisi')->where('id', $tek)->select('device_id')->first();
+                // array_push($arr_device_id, $device_id);
             }
 
             $ikr = DB::table('tb_ikr')->insert($ikr);
 
             DB::commit();
             
-            $this->pushNotif($arr_device_id, "Pekerjaan Baru!", "SPK telah ditambahkan, Segera periksa!");
+            // $this->pushNotif($arr_device_id, "Pekerjaan Baru!", "SPK telah ditambahkan, Segera periksa!");
 
             return redirect()->route('maintenance')->with('success', 'SPK Berhasil dibuat!');
         } catch (\Exception $e) {

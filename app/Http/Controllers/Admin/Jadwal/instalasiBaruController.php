@@ -122,24 +122,25 @@ class instalasiBaruController extends Controller
 
             $arr_device_id = [];
 
-            foreach ($request->teknisi as $tek) {
-                array_push($ikr, [
-                    'id_spk' => $spk_id,
-                    'id_teknisi' => $tek,
-                ]);
+            // foreach ($request->teknisi as $tek) {
+            //     array_push($ikr, [
+            //         'id_spk' => $spk_id,
+            //         'id_teknisi' => $tek,
+            //     ]);
 
-                $device_id = DB::table('tb_teknisi')->where('id', $tek)->select('device_id')->first();
-                array_push($arr_device_id, $device_id);
-            }
+            //     $device_id = DB::table('tb_teknisi')->where('id', $tek)->select('device_id')->first();
+            //     array_push($arr_device_id, $device_id);
+            // }
 
-            $ikr = DB::table('tb_ikr')->insert($ikr);
+            // $ikr = DB::table('tb_ikr')->insert($ikr);
 
             DB::commit();
 
-            $this->pushNotif($arr_device_id, "Pekerjaan Baru!", "SPK telah ditambahkan, Segera periksa!");
+            // $this->pushNotif($arr_device_id, "Pekerjaan Baru!", "SPK telah ditambahkan, Segera periksa!");
 
             $request->session()->flash('success', 'SPK Berhasil dibuat!');
             return redirect()->route('instalasiBaru');
+            
         } catch (\Exception $e) {
             DB::rollBack();
             $request->session()->flash('error', 'Oops.. Sepertinya ada yang salah!');

@@ -115,7 +115,7 @@ class pencabutanController extends Controller
 
             $ikr = [];
             
-            $arr_device_id = [];
+            // $arr_device_id = [];
 
             foreach ($request->teknisi as $tek) {
                 array_push($ikr, [
@@ -123,15 +123,15 @@ class pencabutanController extends Controller
                     'id_teknisi' => $tek,
                 ]);
 
-                $device_id = DB::table('tb_teknisi')->where('id', $tek)->select('device_id')->first();
-                array_push($arr_device_id, $device_id);
+                // $device_id = DB::table('tb_teknisi')->where('id', $tek)->select('device_id')->first();
+                // array_push($arr_device_id, $device_id);
             }
 
             $ikr = DB::table('tb_ikr')->insert($ikr);
 
             DB::commit();
 
-            $this->pushNotif($arr_device_id, "Pekerjaan Baru!", "SPK telah ditambahkan, Segera periksa!");
+            // $this->pushNotif($arr_device_id, "Pekerjaan Baru!", "SPK telah ditambahkan, Segera periksa!");
 
             return redirect()->route('pencabutan')->with('success', 'SPK Berhasil dibuat!');
         } catch (\Exception $e) {
