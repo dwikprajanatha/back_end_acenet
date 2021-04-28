@@ -114,7 +114,7 @@ class instalasiBaruController extends Controller
                 'tgl_pekerjaan' => date('Y-m-d', strtotime($request->tgl_pekerjaan)),
                 'jenis_pekerjaan' => $request->jenis_perbaikan,
                 'jam_mulai' => $request->jam_mulai,
-                'jam_selesai' => $request->jam_selesai,
+                // 'jam_selesai' => $request->jam_selesai,
                 'status' => 0,
             ]);
 
@@ -140,7 +140,7 @@ class instalasiBaruController extends Controller
 
             $request->session()->flash('success', 'SPK Berhasil dibuat!');
             return redirect()->route('instalasiBaru');
-            
+
         } catch (\Exception $e) {
             DB::rollBack();
             $request->session()->flash('error', 'Oops.. Sepertinya ada yang salah!');
@@ -257,7 +257,7 @@ class instalasiBaruController extends Controller
                     'tgl_pekerjaan' => date('Y-m-d', strtotime($request->tgl_pekerjaan)),
                     'jenis_pekerjaan' => $request->jenis_perbaikan,
                     'jam_mulai' => $request->jam_mulai,
-                    'jam_selesai' => $request->jam_selesai,
+                    // 'jam_selesai' => $request->jam_selesai,
                 ]);
 
             $id_ikr = DB::table('tb_ikr')->where('id_spk', $request->id_spk)->select('id')->get();

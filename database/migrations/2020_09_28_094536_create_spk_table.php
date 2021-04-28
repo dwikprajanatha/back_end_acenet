@@ -23,7 +23,7 @@ class CreateSpkTable extends Migration
             $table->date("tgl_pekerjaan");
             $table->tinyInteger("jenis_pekerjaan");
             $table->time("jam_mulai");
-            $table->time("jam_selesai");
+            $table->time("jam_selesai")->nullable();
             $table->string("download_speed")->nullable();
             $table->string("upload_speed")->nullable();
             $table->string("ket_lanjutan")->nullable();
